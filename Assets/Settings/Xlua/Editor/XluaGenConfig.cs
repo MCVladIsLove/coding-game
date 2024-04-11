@@ -11,9 +11,10 @@ using System;
 using XLua;
 using System.Reflection;
 using System.Linq;
+using UnityEngine;
 
 //配置的详细介绍请看Doc下《XLua的配置.doc》
-public static class ExampleConfig
+public static class XluaGenConfig
 {
     /***************如果你全lua编程，可以参考这份自动化配置***************/
     //--------------begin 纯lua编程配置参考----------------------------
@@ -248,6 +249,50 @@ public static class ExampleConfig
     //}
     //--------------end 热补丁自动化配置-------------------------
 
+    [LuaCallCSharp]
+    public static List<Type> LuaCallCSharp = new List<Type>() {
+                typeof(System.Object),
+                typeof(UnityEngine.Object),
+                typeof(Vector2),
+                typeof(Vector3),
+                typeof(Vector4),
+                typeof(Quaternion),
+                typeof(Color),
+                typeof(Ray),
+                typeof(Bounds),
+                typeof(Ray2D),
+                typeof(Time),
+                typeof(GameObject),
+                typeof(Component),
+                typeof(Behaviour),
+                typeof(Transform),
+                typeof(Resources),
+                typeof(TextAsset),
+                typeof(Keyframe),
+                typeof(AnimationCurve),
+                typeof(AnimationClip),
+                typeof(MonoBehaviour),
+                typeof(ParticleSystem),
+                typeof(SkinnedMeshRenderer),
+                typeof(Renderer),
+                typeof(WWW),
+                typeof(Light),
+                typeof(Mathf),
+                typeof(System.Collections.Generic.List<int>),
+                typeof(Action<string>),
+                typeof(UnityEngine.Debug)
+            };
+
+    [CSharpCallLua]
+    public static List<Type> CSharpCallLua = new List<Type>() {
+                typeof(Action),
+                typeof(Func<double, double, double>),
+                typeof(Action<string>),
+                typeof(Action<double>),
+                typeof(UnityEngine.Events.UnityAction),
+                typeof(System.Collections.IEnumerator)
+            };
+
     //黑名单
     [BlackList]
     public static List<List<string>> BlackList = new List<List<string>>()  {
@@ -261,6 +306,12 @@ public static class ExampleConfig
                 new List<string>(){"UnityEngine.CanvasRenderer", "onRequestRebuild"},
                 new List<string>(){"UnityEngine.Light", "areaSize"},
                 new List<string>(){"UnityEngine.Light", "lightmapBakeType"},
+    #if UNITY_ANDROID || UNITY_STANDALONE_WIN
+                new List<string>(){"UnityEngine.Light", "SetLightDirty"},
+                new List<string>(){"UnityEngine.Light", "shadowRadius"},
+                new List<string>(){"UnityEngine.Light", "shadowAngle"},
+    #endif
+
                 new List<string>(){"UnityEngine.WWW", "MovieTexture"},
                 new List<string>(){"UnityEngine.WWW", "GetMovieTexture"},
                 new List<string>(){"UnityEngine.AnimatorOverrideController", "PerformOverrideClipListCleanup"},
@@ -307,5 +358,44 @@ public static class ExampleConfig
         }
         return false;
     };
+#endif
+
+#if UNITY_2022_1_OR_NEWER
+    static bool IsSpanType(Type type)
+    {
+        if (!type.IsGenericType)
+            return false;
+
+        var genericDefinition = type.GetGenericTypeDefinition();
+
+        return
+            genericDefinition == typeof(Span<>) ||
+            genericDefinition == typeof(ReadOnlySpan<>);
+    }
+
+    static bool IsSpanMember(MemberInfo memberInfo)
+    {
+        switch (memberInfo)
+        {
+            case FieldInfo fieldInfo:
+                return IsSpanType(fieldInfo.FieldType);
+
+            case PropertyInfo propertyInfo:
+                return IsSpanType(propertyInfo.PropertyType);
+
+            case ConstructorInfo constructorInfo:
+                return constructorInfo.GetParameters().Any(p => IsSpanType(p.ParameterType));
+
+            case MethodInfo methodInfo:
+                return methodInfo.GetParameters().Any(p => IsSpanType(p.ParameterType)) || IsSpanType(methodInfo.ReturnType);
+
+            default:
+                return false;
+        }
+    }
+
+    [BlackList]
+    public static Func<MemberInfo, bool> SpanMembersFilter = IsSpanMember;
+
 #endif
 }
