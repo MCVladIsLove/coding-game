@@ -289,6 +289,7 @@ public static class XluaGenConfig
                 typeof(Func<double, double, double>),
                 typeof(Action<string>),
                 typeof(Action<double>),
+                typeof(Action<int>),
                 typeof(UnityEngine.Events.UnityAction),
                 typeof(System.Collections.IEnumerator)
             };
