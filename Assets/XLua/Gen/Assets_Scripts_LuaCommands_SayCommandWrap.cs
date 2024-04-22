@@ -15,12 +15,12 @@ using System.Collections.Generic;
 namespace XLua.CSObjectWrap
 {
     using Utils = XLua.Utils;
-    public class AssetsScriptsLuaIntegrationSayCommandWrap 
+    public class AssetsScriptsLuaCommandsSayCommandWrap 
     {
         public static void __Register(RealStatePtr L)
         {
 			ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
-			System.Type type = typeof(Assets.Scripts.LuaIntegration.SayCommand);
+			System.Type type = typeof(Assets.Scripts.LuaCommands.SayCommand);
 			Utils.BeginObjectRegister(type, L, translator, 0, 3, 1, 0);
 			
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "SetExecutionParams", _m_SetExecutionParams);
@@ -56,7 +56,7 @@ namespace XLua.CSObjectWrap
 					float _executionTime = (float)LuaAPI.lua_tonumber(L, 2);
 					bool _isAvaliable = LuaAPI.lua_toboolean(L, 3);
 					
-					var gen_ret = new Assets.Scripts.LuaIntegration.SayCommand(_executionTime, _isAvaliable);
+					var gen_ret = new Assets.Scripts.LuaCommands.SayCommand(_executionTime, _isAvaliable);
 					translator.Push(L, gen_ret);
                     
 					return 1;
@@ -66,7 +66,7 @@ namespace XLua.CSObjectWrap
 			catch(System.Exception gen_e) {
 				return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
 			}
-            return LuaAPI.luaL_error(L, "invalid arguments to Assets.Scripts.LuaIntegration.SayCommand constructor!");
+            return LuaAPI.luaL_error(L, "invalid arguments to Assets.Scripts.LuaCommands.SayCommand constructor!");
             
         }
         
@@ -85,7 +85,7 @@ namespace XLua.CSObjectWrap
                 ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
             
             
-                Assets.Scripts.LuaIntegration.SayCommand gen_to_be_invoked = (Assets.Scripts.LuaIntegration.SayCommand)translator.FastGetCSObj(L, 1);
+                Assets.Scripts.LuaCommands.SayCommand gen_to_be_invoked = (Assets.Scripts.LuaCommands.SayCommand)translator.FastGetCSObj(L, 1);
             
             
                 
@@ -114,7 +114,7 @@ namespace XLua.CSObjectWrap
                 ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
             
             
-                Assets.Scripts.LuaIntegration.SayCommand gen_to_be_invoked = (Assets.Scripts.LuaIntegration.SayCommand)translator.FastGetCSObj(L, 1);
+                Assets.Scripts.LuaCommands.SayCommand gen_to_be_invoked = (Assets.Scripts.LuaCommands.SayCommand)translator.FastGetCSObj(L, 1);
             
             
                 
@@ -141,7 +141,7 @@ namespace XLua.CSObjectWrap
                 ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
             
             
-                Assets.Scripts.LuaIntegration.SayCommand gen_to_be_invoked = (Assets.Scripts.LuaIntegration.SayCommand)translator.FastGetCSObj(L, 1);
+                Assets.Scripts.LuaCommands.SayCommand gen_to_be_invoked = (Assets.Scripts.LuaCommands.SayCommand)translator.FastGetCSObj(L, 1);
             
             
                 
@@ -170,7 +170,7 @@ namespace XLua.CSObjectWrap
 		    try {
                 ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
 			
-                Assets.Scripts.LuaIntegration.SayCommand gen_to_be_invoked = (Assets.Scripts.LuaIntegration.SayCommand)translator.FastGetCSObj(L, 1);
+                Assets.Scripts.LuaCommands.SayCommand gen_to_be_invoked = (Assets.Scripts.LuaCommands.SayCommand)translator.FastGetCSObj(L, 1);
                 LuaAPI.lua_pushstring(L, gen_to_be_invoked.CallName);
             } catch(System.Exception gen_e) {
                 return LuaAPI.luaL_error(L, "c# exception:" + gen_e);

@@ -15,12 +15,12 @@ using System.Collections.Generic;
 namespace XLua.CSObjectWrap
 {
     using Utils = XLua.Utils;
-    public class AssetsScriptsLuaIntegrationCatLuaWrap 
+    public class AssetsScriptsLuaObjectsCatLuaWrap 
     {
         public static void __Register(RealStatePtr L)
         {
 			ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
-			System.Type type = typeof(Assets.Scripts.LuaIntegration.CatLua);
+			System.Type type = typeof(Assets.Scripts.LuaObjects.CatLua);
 			Utils.BeginObjectRegister(type, L, translator, 0, 2, 0, 0);
 			
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "Move", _m_Move);
@@ -49,13 +49,13 @@ namespace XLua.CSObjectWrap
             
 			try {
                 ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
-				if(LuaAPI.lua_gettop(L) == 4 && translator.Assignable<UnityEngine.MonoBehaviour>(L, 2) && translator.Assignable<Assets.Scripts.LuaIntegration.MoveCommand>(L, 3) && translator.Assignable<Assets.Scripts.LuaIntegration.SayCommand>(L, 4))
+				if(LuaAPI.lua_gettop(L) == 4 && translator.Assignable<UnityEngine.MonoBehaviour>(L, 2) && translator.Assignable<Assets.Scripts.LuaCommands.MoveCommand>(L, 3) && translator.Assignable<Assets.Scripts.LuaCommands.SayCommand>(L, 4))
 				{
 					UnityEngine.MonoBehaviour _coroutineRunner = (UnityEngine.MonoBehaviour)translator.GetObject(L, 2, typeof(UnityEngine.MonoBehaviour));
-					Assets.Scripts.LuaIntegration.MoveCommand _moveCommand = (Assets.Scripts.LuaIntegration.MoveCommand)translator.GetObject(L, 3, typeof(Assets.Scripts.LuaIntegration.MoveCommand));
-					Assets.Scripts.LuaIntegration.SayCommand _sayCommand = (Assets.Scripts.LuaIntegration.SayCommand)translator.GetObject(L, 4, typeof(Assets.Scripts.LuaIntegration.SayCommand));
+					Assets.Scripts.LuaCommands.MoveCommand _moveCommand = (Assets.Scripts.LuaCommands.MoveCommand)translator.GetObject(L, 3, typeof(Assets.Scripts.LuaCommands.MoveCommand));
+					Assets.Scripts.LuaCommands.SayCommand _sayCommand = (Assets.Scripts.LuaCommands.SayCommand)translator.GetObject(L, 4, typeof(Assets.Scripts.LuaCommands.SayCommand));
 					
-					var gen_ret = new Assets.Scripts.LuaIntegration.CatLua(_coroutineRunner, _moveCommand, _sayCommand);
+					var gen_ret = new Assets.Scripts.LuaObjects.CatLua(_coroutineRunner, _moveCommand, _sayCommand);
 					translator.Push(L, gen_ret);
                     
 					return 1;
@@ -65,7 +65,7 @@ namespace XLua.CSObjectWrap
 			catch(System.Exception gen_e) {
 				return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
 			}
-            return LuaAPI.luaL_error(L, "invalid arguments to Assets.Scripts.LuaIntegration.CatLua constructor!");
+            return LuaAPI.luaL_error(L, "invalid arguments to Assets.Scripts.LuaObjects.CatLua constructor!");
             
         }
         
@@ -84,7 +84,7 @@ namespace XLua.CSObjectWrap
                 ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
             
             
-                Assets.Scripts.LuaIntegration.CatLua gen_to_be_invoked = (Assets.Scripts.LuaIntegration.CatLua)translator.FastGetCSObj(L, 1);
+                Assets.Scripts.LuaObjects.CatLua gen_to_be_invoked = (Assets.Scripts.LuaObjects.CatLua)translator.FastGetCSObj(L, 1);
             
             
 			    int gen_param_count = LuaAPI.lua_gettop(L);
@@ -115,7 +115,7 @@ namespace XLua.CSObjectWrap
                 return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
             }
             
-            return LuaAPI.luaL_error(L, "invalid arguments to Assets.Scripts.LuaIntegration.CatLua.Move!");
+            return LuaAPI.luaL_error(L, "invalid arguments to Assets.Scripts.LuaObjects.CatLua.Move!");
             
         }
         
@@ -127,7 +127,7 @@ namespace XLua.CSObjectWrap
                 ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
             
             
-                Assets.Scripts.LuaIntegration.CatLua gen_to_be_invoked = (Assets.Scripts.LuaIntegration.CatLua)translator.FastGetCSObj(L, 1);
+                Assets.Scripts.LuaObjects.CatLua gen_to_be_invoked = (Assets.Scripts.LuaObjects.CatLua)translator.FastGetCSObj(L, 1);
             
             
                 

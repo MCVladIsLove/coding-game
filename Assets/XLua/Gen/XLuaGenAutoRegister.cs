@@ -22,13 +22,13 @@ namespace XLua.CSObjectWrap
         static void wrapInit0(LuaEnv luaenv, ObjectTranslator translator)
         {
         
-            translator.DelayWrapLoader(typeof(Assets.Scripts.LuaIntegration.CatLua), AssetsScriptsLuaIntegrationCatLuaWrap.__Register);
+            translator.DelayWrapLoader(typeof(Assets.Scripts.LuaCommands.SayCommand), AssetsScriptsLuaCommandsSayCommandWrap.__Register);
         
         
             translator.DelayWrapLoader(typeof(Assets.Scripts.LuaIntegration.LuaCsCommand), AssetsScriptsLuaIntegrationLuaCsCommandWrap.__Register);
         
         
-            translator.DelayWrapLoader(typeof(Assets.Scripts.LuaIntegration.SayCommand), AssetsScriptsLuaIntegrationSayCommandWrap.__Register);
+            translator.DelayWrapLoader(typeof(Assets.Scripts.LuaObjects.CatLua), AssetsScriptsLuaObjectsCatLuaWrap.__Register);
         
         
             translator.DelayWrapLoader(typeof(object), SystemObjectWrap.__Register);

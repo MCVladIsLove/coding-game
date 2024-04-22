@@ -4,6 +4,8 @@ using UnityEngine;
 using Assets.Scripts.LuaIntegration;
 using XLua;
 using System.Text.RegularExpressions;
+using Assets.Scripts.LuaCommands;
+using Assets.Scripts.LuaObjects;
 
 public class Test2 : MonoBehaviour
 {
@@ -15,10 +17,10 @@ public class Test2 : MonoBehaviour
         CatLua cat = new CatLua(this, move, say);
         string s = @"
         --while true do
-            --M-ove(Vector3.up)
-            --Move(Vector3.right)
-            --M-ove(Vector3.down)
-            --M-ove(Vector3.left)
+            Move(Vector3.up)
+            Move(Vector3.right)
+            Move(Vector3.down)
+            Move(Vector3.left)
         --end
         print(Say('sas', 'sos'))
         Say('sas', 'ssi')

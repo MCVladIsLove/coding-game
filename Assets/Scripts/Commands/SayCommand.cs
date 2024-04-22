@@ -1,7 +1,8 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.LuaIntegration;
+using UnityEngine;
 using XLua;
 
-namespace Assets.Scripts.LuaIntegration
+namespace Assets.Scripts.LuaCommands
 {
     [LuaCallCSharp]
     public class SayCommand : LuaCsCommand, ICommandReturnResult<string>

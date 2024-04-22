@@ -2,8 +2,10 @@
 using UnityEngine;
 using XLua;
 using Assets.Scripts.Utils;
+using Assets.Scripts.LuaCommands;
+using Assets.Scripts.LuaIntegration;
 
-namespace Assets.Scripts.LuaIntegration
+namespace Assets.Scripts.LuaObjects
 {
     [LuaCallCSharp]
     public class CatLua : InjectedInLua
