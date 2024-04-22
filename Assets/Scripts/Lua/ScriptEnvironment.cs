@@ -22,8 +22,6 @@ namespace Assets.Scripts.LuaIntegration
             _luaScriptPreparer = scriptPreparer;
             _script = defaultScript;
             CreateTable();
-            //if (_script != null)
-              //  GetScriptAsCsFuncton()(); // todo: refactor
         }
 
         private void CreateTable()
@@ -34,7 +32,7 @@ namespace Assets.Scripts.LuaIntegration
 
         public Action GetScriptAsCsFuncton() // todo: refactor
         {
-            _script = _luaScriptPreparer.PrepareScript(_script);
+            _script = _luaScriptPreparer.PrepareScript(_script, _injectedObject);
             _luaEnv.DoString(_script, env: _scriptTable);
             _scriptTable.Get("__scriptAsFunction", out Action resultFunc);
             return resultFunc;
