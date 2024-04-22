@@ -2,6 +2,6 @@
 {
     public interface ILuaScriptPreparer
     {
-        string PrepareScript(string script);
+        string PrepareScript(string script, InjectedInLua injectedObject);
     }
 }
