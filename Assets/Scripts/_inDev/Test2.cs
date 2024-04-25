@@ -6,13 +6,14 @@ using XLua;
 using System.Text.RegularExpressions;
 using Assets.Scripts.LuaCommands;
 using Assets.Scripts.LuaObjects;
+using System;
 
 public class Test2 : MonoBehaviour
 {
     private void Start()
     {
         LuaEnv env = new LuaEnv();
-        MoveCommand move = new MoveCommand(0.2f, true, transform);
+        MoveCommand move = new MoveCommand(0.7f, true, transform);
         SayCommand say = new SayCommand(0, true);
         CatLua cat = new CatLua(this, move, say);
         string s = @"
@@ -22,8 +23,8 @@ public class Test2 : MonoBehaviour
             Move(Vector3.down)
             Move(Vector3.left)
         --end
-        print(Say('sas', 'sos'))
-        Say('sas', 'ssi')
+        print(Say('sss', 'aaa'))
+        Say('bbb', 'vvv')
     ";
 
         ScriptEnvironment mainEnv = new ScriptEnvironment(
@@ -33,6 +34,6 @@ public class Test2 : MonoBehaviour
             new DefaultLuaTablePreparer(),
             new DefaultLuaScriptPreparer());
 
-        mainEnv.GetScriptAsCsFuncton()();
+        mainEnv.GetScriptAs<Action>()();
     }
 }

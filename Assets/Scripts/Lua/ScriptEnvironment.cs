@@ -30,12 +30,12 @@ namespace Assets.Scripts.LuaIntegration
             _luaTablePreparer.PrepareTable(_luaEnv, _scriptTable, _injectedObject);
         }
 
-        public Action GetScriptAsCsFuncton() // todo: refactor
+        public T GetScriptAs<T>()
         {
             _script = _luaScriptPreparer.PrepareScript(_script, _injectedObject);
             _luaEnv.DoString(_script, env: _scriptTable);
-            _scriptTable.Get("__scriptAsFunction", out Action resultFunc);
-            return resultFunc;
+            
+            return _scriptTable.Get<T>("__scriptAsFunction");
         }
     }
 }
