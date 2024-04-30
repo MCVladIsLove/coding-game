@@ -17,12 +17,10 @@ public class Test2 : MonoBehaviour
         SayCommand say = new SayCommand(0, true);
         CatLua cat = new CatLua(this, move, say);
         string s = @"
-        --while true do
-            Move(Vector3.up)
-            Move(Vector3.right)
-            Move(Vector3.down)
-            Move(Vector3.left)
-        --end
+        Move(Vector3.up)
+        Move(Vector3.right)
+        Move(Vector3.down)
+        Move(Vector3.left)
         print(Say('sss', 'aaa'))
         Say('bbb', 'vvv')
     ";

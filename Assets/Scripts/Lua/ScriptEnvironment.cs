@@ -10,11 +10,15 @@ namespace Assets.Scripts.LuaIntegration
         private LuaTable _scriptTable;
 
         private ILuaTablePreparer _luaTablePreparer;
-        private ILuaScriptPreparer _luaScriptPreparer;
+        private ILuaScriptPreparer _luaScriptPreparer; 
 
         private string _script;
 
-        public ScriptEnvironment(LuaEnv luaEnv, InjectedInLua injectedObject, string defaultScript, ILuaTablePreparer tablePreparer, ILuaScriptPreparer scriptPreparer)
+        public ScriptEnvironment(LuaEnv luaEnv, 
+            InjectedInLua injectedObject, 
+            string defaultScript, 
+            ILuaTablePreparer tablePreparer, 
+            ILuaScriptPreparer scriptPreparer)
         {
             _luaEnv = luaEnv;
             _injectedObject = injectedObject;

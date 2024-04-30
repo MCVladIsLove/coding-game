@@ -24,23 +24,23 @@ namespace Assets.Scripts.LuaIntegration
             }
 
             luaEnv.DoString(@"
-util = _G.require 'xlua.util'
+            util = _G.require 'xlua.util'
 
-asyncTable = { 
-    " + asyncCommands.ToString() + @"
-}
+            asyncTable = { 
+                " + asyncCommands.ToString() + @"
+            }
 
-__index = function (table, key)
+            __index = function (table, key)
     
-    if asyncTable[key] ~= nil then
-        return function(...) return asyncTable[key](__scriptTable, ...) end
-    end
+                if asyncTable[key] ~= nil then
+                    return function(...) return asyncTable[key](__scriptTable, ...) end
+                end
 
-    if _G.type(__scriptTable[key]) == 'function' then 
-        return function (...) return __scriptTable[key](__scriptTable, ...) end
-    end
-    return __scriptTable[key]
-end", env: meta);
+                if _G.type(__scriptTable[key]) == 'function' then 
+                    return function (...) return __scriptTable[key](__scriptTable, ...) end
+                end
+                return __scriptTable[key]
+            end", env: meta);
 
             table.SetMetaTable(meta);
             meta.Dispose();
