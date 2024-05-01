@@ -3,9 +3,9 @@
 <linker>
 
 	<assembly fullname="Assembly-CSharp">
-	    <type fullname="Assets.Scripts.LuaCommands.SayCommand" preserve="all"/>
+	    <type fullname="Assets.Scripts.LuaObjects.CatLua" preserve="all"/>
 		<type fullname="Assets.Scripts.LuaIntegration.LuaCsCommand" preserve="all"/>
-		<type fullname="Assets.Scripts.LuaObjects.CatLua" preserve="all"/>
+		<type fullname="Assets.Scripts.LuaCommands.SayCommand" preserve="all"/>
 		
 	</assembly>
 

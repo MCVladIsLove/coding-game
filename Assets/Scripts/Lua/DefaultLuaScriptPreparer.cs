@@ -7,6 +7,13 @@ namespace Assets.Scripts.LuaIntegration
     {
         public string PrepareScript(string script, InjectedInLua injectedObject)
         {
+            StringBuilder scriptBuilder = new StringBuilder();
+
+            scriptBuilder.AppendLine("__isScriptRunningRESERVEDVALUE = true")
+                .AppendLine(script)
+                .AppendLine("__isScriptRunningRESERVEDVALUE = false");
+
+
             StringBuilder regexBuilder = new StringBuilder(@"(");
 
             bool addSeparator = false;
@@ -22,10 +29,13 @@ namespace Assets.Scripts.LuaIntegration
 
             Regex asyncCommandsRegex = new Regex(regexBuilder.ToString());
 
-            if (asyncCommandsRegex.IsMatch(script))
-                script = "co = coroutine.create(function() \n" + script + "\n    end) assert(coroutine.resume(co))";
 
-            return "function __scriptAsFunction()\n" + script + "\nend";
+            if (asyncCommandsRegex.IsMatch(script))
+                scriptBuilder.Insert(0, "co = coroutine.create(function() ")
+                    .AppendLine("end) assert(coroutine.resume(co))");
+
+            return scriptBuilder.Insert(0, "function __scriptAsFunction()")
+                .AppendLine("end").ToString();
         }
     }
 }

@@ -12,7 +12,8 @@ namespace Assets.Scripts.LuaIntegration
         private ILuaTablePreparer _luaTablePreparer;
         private ILuaScriptPreparer _luaScriptPreparer; 
 
-        private string _script;
+        private string _currentScript;
+        private string _defaultScript;
 
         public ScriptEnvironment(LuaEnv luaEnv, 
             InjectedInLua injectedObject, 
@@ -24,7 +25,8 @@ namespace Assets.Scripts.LuaIntegration
             _injectedObject = injectedObject;
             _luaTablePreparer = tablePreparer;
             _luaScriptPreparer = scriptPreparer;
-            _script = defaultScript;
+            _currentScript = defaultScript;
+            _defaultScript = defaultScript;
             CreateTable();
         }
 
@@ -36,10 +38,15 @@ namespace Assets.Scripts.LuaIntegration
 
         public T GetScriptAs<T>()
         {
-            _script = _luaScriptPreparer.PrepareScript(_script, _injectedObject);
-            _luaEnv.DoString(_script, env: _scriptTable);
+            string preparedScript = _luaScriptPreparer.PrepareScript(_currentScript, _injectedObject);
+            _luaEnv.DoString(preparedScript, env: _scriptTable);
             
             return _scriptTable.Get<T>("__scriptAsFunction");
+        }
+
+        public bool IsScriptRunning()
+        {
+            return _scriptTable.Get<bool>("__isScriptRunningRESERVEDVALUE");
         }
     }
 }

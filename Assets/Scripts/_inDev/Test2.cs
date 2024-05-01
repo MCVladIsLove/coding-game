@@ -10,28 +10,53 @@ using System;
 
 public class Test2 : MonoBehaviour
 {
+    ScriptEnvironment mainEnv;
+    CatLua cat;
+
+    Action act;
+
+
     private void Start()
     {
         LuaEnv env = new LuaEnv();
         MoveCommand move = new MoveCommand(0.7f, true, transform);
         SayCommand say = new SayCommand(0, true);
-        CatLua cat = new CatLua(this, move, say);
+        cat = new CatLua(this, move, say);
         string s = @"
-        Move(Vector3.up)
-        Move(Vector3.right)
-        Move(Vector3.down)
-        Move(Vector3.left)
+
+        x = 0
+        print(x)
+        Move(Vector3.up * x)
+        Move(Vector3.right * x)
+        Move(Vector3.down * x)
+        Move(Vector3.left * x)
         print(Say('sss', 'aaa'))
         Say('bbb', 'vvv')
+        x = x + 1
+        print(x)
     ";
 
-        ScriptEnvironment mainEnv = new ScriptEnvironment(
+        mainEnv = new ScriptEnvironment(
             env, 
             cat, 
             s, 
             new DefaultLuaTablePreparer(),
             new DefaultLuaScriptPreparer());
 
-        mainEnv.GetScriptAs<Action>()();
+        act = mainEnv.GetScriptAs<Action>();
+    }
+
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (!mainEnv.IsScriptRunning())
+                act();
+        }
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+
+        }
     }
 }
