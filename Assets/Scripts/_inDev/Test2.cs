@@ -23,8 +23,10 @@ public class Test2 : MonoBehaviour
         SayCommand say = new SayCommand(0, true);
         cat = new CatLua(this, move, say);
         string s = @"
-
-        x = 0
+        print(Commands)
+        print(Commands['Say'])
+        Commands['Say']()
+        x = 1
         print(x)
         Move(Vector3.up * x)
         Move(Vector3.right * x)

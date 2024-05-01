@@ -5,7 +5,7 @@ namespace Assets.Scripts.LuaIntegration
 {
     public class DefaultLuaScriptPreparer : ILuaScriptPreparer
     {
-        public string PrepareScript(string script, InjectedInLua injectedObject)
+        public string PrepareScript(string script, InjectableInLua injectedObject)
         {
             StringBuilder scriptBuilder = new StringBuilder();
 

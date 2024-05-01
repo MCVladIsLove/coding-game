@@ -6,7 +6,7 @@ namespace Assets.Scripts.LuaIntegration
     public class ScriptEnvironment
     {
         private LuaEnv _luaEnv;
-        private InjectedInLua _injectedObject;
+        private InjectableInLua _injectedObject;
         private LuaTable _scriptTable;
 
         private ILuaTablePreparer _luaTablePreparer;
@@ -16,7 +16,7 @@ namespace Assets.Scripts.LuaIntegration
         private string _defaultScript;
 
         public ScriptEnvironment(LuaEnv luaEnv, 
-            InjectedInLua injectedObject, 
+            InjectableInLua injectedObject, 
             string defaultScript, 
             ILuaTablePreparer tablePreparer, 
             ILuaScriptPreparer scriptPreparer)

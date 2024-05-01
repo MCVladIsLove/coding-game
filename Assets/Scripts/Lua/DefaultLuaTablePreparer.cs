@@ -5,7 +5,7 @@ namespace Assets.Scripts.LuaIntegration
 {
     public class DefaultLuaTablePreparer : ILuaTablePreparer
     {
-        public void PrepareTable(LuaEnv luaEnv, LuaTable table, InjectedInLua injectedObject)
+        public void PrepareTable(LuaEnv luaEnv, LuaTable table, InjectableInLua injectedObject)
         {
             LuaTable meta = luaEnv.NewTable();
             meta.Set("_G", luaEnv.Global);

@@ -8,7 +8,7 @@ using Assets.Scripts.LuaIntegration;
 namespace Assets.Scripts.LuaObjects
 {
     [LuaCallCSharp]
-    public class CatLua : InjectedInLua
+    public class CatLua : InjectableInLua
     {
         private MoveCommand _moveCommand;
         private SayCommand _sayCommand;
@@ -23,7 +23,7 @@ namespace Assets.Scripts.LuaObjects
 
         public void Move(Vector3 moveDirection, Action notifyFinish = null)
         {
-            AsyncUtils.ExecuteAfter(_coroutineRunner, _moveCommand.ExecutionTime, () =>
+            AsyncUtils.ExecuteAfter(_parentBehaviour, _moveCommand.ExecutionTime, () =>
             {
                 _moveCommand.SetExecutionParams(moveDirection);
                 _moveCommand.Execute();

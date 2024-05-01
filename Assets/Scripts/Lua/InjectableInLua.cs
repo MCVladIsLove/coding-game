@@ -1,18 +1,20 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using XLua;
 
 namespace Assets.Scripts.LuaIntegration
 {
-    public abstract class InjectedInLua
+    [LuaCallCSharp]
+    public abstract class InjectableInLua
     {
         protected Dictionary<string, LuaCsCommand> _commands = new Dictionary<string, LuaCsCommand>();
-        protected MonoBehaviour _coroutineRunner;
+        protected MonoBehaviour _parentBehaviour;
 
         public Dictionary<string, LuaCsCommand> Commands => _commands;
 
-        public InjectedInLua(MonoBehaviour coroutineRunner)
+        public InjectableInLua(MonoBehaviour parentBehaviour)
         {
-            _coroutineRunner = coroutineRunner;
+            _parentBehaviour = parentBehaviour;
         }
 
         protected void RegisterCommand(LuaCsCommand command)
