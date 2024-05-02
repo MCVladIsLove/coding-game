@@ -25,6 +25,18 @@ namespace XLua.CSObjectWrap
             translator.DelayWrapLoader(typeof(Assets.Scripts.LuaObjects.CatLua), AssetsScriptsLuaObjectsCatLuaWrap.__Register);
         
         
+            translator.DelayWrapLoader(typeof(Assets.Scripts.LuaObjects.CheckEnum), AssetsScriptsLuaObjectsCheckEnumWrap.__Register);
+        
+        
+            translator.DelayWrapLoader(typeof(Assets.Scripts.LuaObjects.CheckEnum2), AssetsScriptsLuaObjectsCheckEnum2Wrap.__Register);
+        
+        
+            translator.DelayWrapLoader(typeof(Assets.Scripts.LuaObjects.CheckEnum23), AssetsScriptsLuaObjectsCheckEnum23Wrap.__Register);
+        
+        
+            translator.DelayWrapLoader(typeof(Assets.Scripts.LuaIntegration.InjectableInLua), AssetsScriptsLuaIntegrationInjectableInLuaWrap.__Register);
+        
+        
             translator.DelayWrapLoader(typeof(Assets.Scripts.LuaIntegration.LuaCsCommand), AssetsScriptsLuaIntegrationLuaCsCommandWrap.__Register);
         
         

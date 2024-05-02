@@ -21,14 +21,18 @@ namespace XLua.CSObjectWrap
         {
 			ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
 			System.Type type = typeof(Assets.Scripts.LuaObjects.CatLua);
-			Utils.BeginObjectRegister(type, L, translator, 0, 2, 0, 0);
+			Utils.BeginObjectRegister(type, L, translator, 0, 4, 1, 1);
 			
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "Move", _m_Move);
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "Say", _m_Say);
+			Utils.RegisterFunc(L, Utils.METHOD_IDX, "SSSS", _m_SSSS);
+			Utils.RegisterFunc(L, Utils.METHOD_IDX, "dddd", _m_dddd);
 			
 			
-			
-			
+			Utils.RegisterFunc(L, Utils.GETTER_IDX, "en", _g_get_en);
+            
+			Utils.RegisterFunc(L, Utils.SETTER_IDX, "en", _s_set_en);
+            
 			
 			Utils.EndObjectRegister(type, L, translator, null, null,
 			    null, null, null);
@@ -149,10 +153,98 @@ namespace XLua.CSObjectWrap
             
         }
         
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        static int _m_SSSS(RealStatePtr L)
+        {
+		    try {
+            
+                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
+            
+            
+                Assets.Scripts.LuaObjects.CatLua gen_to_be_invoked = (Assets.Scripts.LuaObjects.CatLua)translator.FastGetCSObj(L, 1);
+            
+            
+                
+                {
+                    Assets.Scripts.LuaObjects.CheckEnum _d;translator.Get(L, 2, out _d);
+                    Assets.Scripts.LuaObjects.CheckEnum2 _dd;translator.Get(L, 3, out _dd);
+                    Assets.Scripts.LuaObjects.CheckEnum2 _ddd;translator.Get(L, 4, out _ddd);
+                    
+                    gen_to_be_invoked.SSSS( _d, _dd, _ddd );
+                    
+                    
+                    
+                    return 0;
+                }
+                
+            } catch(System.Exception gen_e) {
+                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
+            }
+            
+        }
+        
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        static int _m_dddd(RealStatePtr L)
+        {
+		    try {
+            
+                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
+            
+            
+                Assets.Scripts.LuaObjects.CatLua gen_to_be_invoked = (Assets.Scripts.LuaObjects.CatLua)translator.FastGetCSObj(L, 1);
+            
+            
+                
+                {
+                    Assets.Scripts.LuaObjects.CheckEnum _dffas;translator.Get(L, 2, out _dffas);
+                    
+                    gen_to_be_invoked.dddd( _dffas );
+                    
+                    
+                    
+                    return 0;
+                }
+                
+            } catch(System.Exception gen_e) {
+                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
+            }
+            
+        }
         
         
         
         
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        static int _g_get_en(RealStatePtr L)
+        {
+		    try {
+                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
+			
+                Assets.Scripts.LuaObjects.CatLua gen_to_be_invoked = (Assets.Scripts.LuaObjects.CatLua)translator.FastGetCSObj(L, 1);
+                translator.PushAssetsScriptsLuaObjectsCheckEnum(L, gen_to_be_invoked.en);
+            } catch(System.Exception gen_e) {
+                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
+            }
+            return 1;
+        }
+        
+        
+        
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        static int _s_set_en(RealStatePtr L)
+        {
+		    try {
+                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
+			
+                Assets.Scripts.LuaObjects.CatLua gen_to_be_invoked = (Assets.Scripts.LuaObjects.CatLua)translator.FastGetCSObj(L, 1);
+                Assets.Scripts.LuaObjects.CheckEnum gen_value;translator.Get(L, 2, out gen_value);
+				gen_to_be_invoked.en = gen_value;
+            
+            } catch(System.Exception gen_e) {
+                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
+            }
+            return 0;
+        }
         
 		
 		

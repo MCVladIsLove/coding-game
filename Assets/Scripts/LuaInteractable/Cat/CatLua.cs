@@ -13,6 +13,8 @@ namespace Assets.Scripts.LuaObjects
         private MoveCommand _moveCommand;
         private SayCommand _sayCommand;
 
+        public CheckEnum en;
+
         public CatLua(MonoBehaviour coroutineRunner, MoveCommand moveCommand, SayCommand sayCommand) : base(coroutineRunner)
         {
             _moveCommand = moveCommand;
@@ -36,5 +38,39 @@ namespace Assets.Scripts.LuaObjects
             _sayCommand.Execute();
             return _sayCommand.GetResult();
         }
+
+        public void SSSS(CheckEnum d, CheckEnum2 dd, CheckEnum2 ddd)
+        {
+
+        }
+        public void dddd(CheckEnum dffas)
+        {
+
+        }
     }
+
+    [LuaCallCSharp] // todo: CLEAN THIS
+    public enum CheckEnum
+    {
+        A,
+        B,
+        C
+    }
+
+    [LuaCallCSharp]
+    public enum CheckEnum2
+    {
+        A,
+        B,
+        C
+    }
+    [LuaCallCSharp]
+    public enum CheckEnum23
+    {
+        A,
+        B,
+        C
+    }
+
+
 }

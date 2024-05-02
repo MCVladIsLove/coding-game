@@ -26,6 +26,9 @@ namespace XLua
 			translator.RegisterPushAndGetAndUpdate<UnityEngine.Ray>(translator.PushUnityEngineRay, translator.GetUnityEngineRay, translator.UpdateUnityEngineRay);
 			translator.RegisterPushAndGetAndUpdate<UnityEngine.Bounds>(translator.PushUnityEngineBounds, translator.GetUnityEngineBounds, translator.UpdateUnityEngineBounds);
 			translator.RegisterPushAndGetAndUpdate<UnityEngine.Ray2D>(translator.PushUnityEngineRay2D, translator.GetUnityEngineRay2D, translator.UpdateUnityEngineRay2D);
+			translator.RegisterPushAndGetAndUpdate<Assets.Scripts.LuaObjects.CheckEnum>(translator.PushAssetsScriptsLuaObjectsCheckEnum, translator.GetAssetsScriptsLuaObjectsCheckEnum, translator.UpdateAssetsScriptsLuaObjectsCheckEnum);
+			translator.RegisterPushAndGetAndUpdate<Assets.Scripts.LuaObjects.CheckEnum2>(translator.PushAssetsScriptsLuaObjectsCheckEnum2, translator.GetAssetsScriptsLuaObjectsCheckEnum2, translator.UpdateAssetsScriptsLuaObjectsCheckEnum2);
+			translator.RegisterPushAndGetAndUpdate<Assets.Scripts.LuaObjects.CheckEnum23>(translator.PushAssetsScriptsLuaObjectsCheckEnum23, translator.GetAssetsScriptsLuaObjectsCheckEnum23, translator.UpdateAssetsScriptsLuaObjectsCheckEnum23);
 		
 		}
         
@@ -557,6 +560,258 @@ namespace XLua
             }
         }
         
+        static int AssetsScriptsLuaObjectsCheckEnum_TypeID = -1;
+		static int AssetsScriptsLuaObjectsCheckEnum_EnumRef = -1;
+        
+        public static void PushAssetsScriptsLuaObjectsCheckEnum(this ObjectTranslator thiz, RealStatePtr L, Assets.Scripts.LuaObjects.CheckEnum val)
+        {
+            if (AssetsScriptsLuaObjectsCheckEnum_TypeID == -1)
+            {
+			    bool is_first;
+                AssetsScriptsLuaObjectsCheckEnum_TypeID = thiz.getTypeId(L, typeof(Assets.Scripts.LuaObjects.CheckEnum), out is_first);
+				
+				if (AssetsScriptsLuaObjectsCheckEnum_EnumRef == -1)
+				{
+				    Utils.LoadCSTable(L, typeof(Assets.Scripts.LuaObjects.CheckEnum));
+				    AssetsScriptsLuaObjectsCheckEnum_EnumRef = LuaAPI.luaL_ref(L, LuaIndexes.LUA_REGISTRYINDEX);
+				}
+				
+            }
+			
+			if (LuaAPI.xlua_tryget_cachedud(L, (int)val, AssetsScriptsLuaObjectsCheckEnum_EnumRef) == 1)
+            {
+			    return;
+			}
+			
+            IntPtr buff = LuaAPI.xlua_pushstruct(L, 4, AssetsScriptsLuaObjectsCheckEnum_TypeID);
+            if (!CopyByValue_Gen.Pack(buff, 0, (int)val))
+            {
+                throw new Exception("pack fail fail for Assets.Scripts.LuaObjects.CheckEnum ,value="+val);
+            }
+			
+			LuaAPI.lua_getref(L, AssetsScriptsLuaObjectsCheckEnum_EnumRef);
+			LuaAPI.lua_pushvalue(L, -2);
+			LuaAPI.xlua_rawseti(L, -2, (int)val);
+			LuaAPI.lua_pop(L, 1);
+			
+        }
+		
+        public static void GetAssetsScriptsLuaObjectsCheckEnum(this ObjectTranslator thiz, RealStatePtr L, int index, out Assets.Scripts.LuaObjects.CheckEnum val)
+        {
+		    LuaTypes type = LuaAPI.lua_type(L, index);
+            if (type == LuaTypes.LUA_TUSERDATA )
+            {
+			    if (LuaAPI.xlua_gettypeid(L, index) != AssetsScriptsLuaObjectsCheckEnum_TypeID)
+				{
+				    throw new Exception("invalid userdata for Assets.Scripts.LuaObjects.CheckEnum");
+				}
+				
+                IntPtr buff = LuaAPI.lua_touserdata(L, index);
+				int e;
+                if (!CopyByValue_Gen.UnPack(buff, 0, out e))
+                {
+                    throw new Exception("unpack fail for Assets.Scripts.LuaObjects.CheckEnum");
+                }
+				val = (Assets.Scripts.LuaObjects.CheckEnum)e;
+                
+            }
+            else
+            {
+                val = (Assets.Scripts.LuaObjects.CheckEnum)thiz.objectCasters.GetCaster(typeof(Assets.Scripts.LuaObjects.CheckEnum))(L, index, null);
+            }
+        }
+		
+        public static void UpdateAssetsScriptsLuaObjectsCheckEnum(this ObjectTranslator thiz, RealStatePtr L, int index, Assets.Scripts.LuaObjects.CheckEnum val)
+        {
+		    
+            if (LuaAPI.lua_type(L, index) == LuaTypes.LUA_TUSERDATA)
+            {
+			    if (LuaAPI.xlua_gettypeid(L, index) != AssetsScriptsLuaObjectsCheckEnum_TypeID)
+				{
+				    throw new Exception("invalid userdata for Assets.Scripts.LuaObjects.CheckEnum");
+				}
+				
+                IntPtr buff = LuaAPI.lua_touserdata(L, index);
+                if (!CopyByValue_Gen.Pack(buff, 0,  (int)val))
+                {
+                    throw new Exception("pack fail for Assets.Scripts.LuaObjects.CheckEnum ,value="+val);
+                }
+            }
+			
+            else
+            {
+                throw new Exception("try to update a data with lua type:" + LuaAPI.lua_type(L, index));
+            }
+        }
+        
+        static int AssetsScriptsLuaObjectsCheckEnum2_TypeID = -1;
+		static int AssetsScriptsLuaObjectsCheckEnum2_EnumRef = -1;
+        
+        public static void PushAssetsScriptsLuaObjectsCheckEnum2(this ObjectTranslator thiz, RealStatePtr L, Assets.Scripts.LuaObjects.CheckEnum2 val)
+        {
+            if (AssetsScriptsLuaObjectsCheckEnum2_TypeID == -1)
+            {
+			    bool is_first;
+                AssetsScriptsLuaObjectsCheckEnum2_TypeID = thiz.getTypeId(L, typeof(Assets.Scripts.LuaObjects.CheckEnum2), out is_first);
+				
+				if (AssetsScriptsLuaObjectsCheckEnum2_EnumRef == -1)
+				{
+				    Utils.LoadCSTable(L, typeof(Assets.Scripts.LuaObjects.CheckEnum2));
+				    AssetsScriptsLuaObjectsCheckEnum2_EnumRef = LuaAPI.luaL_ref(L, LuaIndexes.LUA_REGISTRYINDEX);
+				}
+				
+            }
+			
+			if (LuaAPI.xlua_tryget_cachedud(L, (int)val, AssetsScriptsLuaObjectsCheckEnum2_EnumRef) == 1)
+            {
+			    return;
+			}
+			
+            IntPtr buff = LuaAPI.xlua_pushstruct(L, 4, AssetsScriptsLuaObjectsCheckEnum2_TypeID);
+            if (!CopyByValue_Gen.Pack(buff, 0, (int)val))
+            {
+                throw new Exception("pack fail fail for Assets.Scripts.LuaObjects.CheckEnum2 ,value="+val);
+            }
+			
+			LuaAPI.lua_getref(L, AssetsScriptsLuaObjectsCheckEnum2_EnumRef);
+			LuaAPI.lua_pushvalue(L, -2);
+			LuaAPI.xlua_rawseti(L, -2, (int)val);
+			LuaAPI.lua_pop(L, 1);
+			
+        }
+		
+        public static void GetAssetsScriptsLuaObjectsCheckEnum2(this ObjectTranslator thiz, RealStatePtr L, int index, out Assets.Scripts.LuaObjects.CheckEnum2 val)
+        {
+		    LuaTypes type = LuaAPI.lua_type(L, index);
+            if (type == LuaTypes.LUA_TUSERDATA )
+            {
+			    if (LuaAPI.xlua_gettypeid(L, index) != AssetsScriptsLuaObjectsCheckEnum2_TypeID)
+				{
+				    throw new Exception("invalid userdata for Assets.Scripts.LuaObjects.CheckEnum2");
+				}
+				
+                IntPtr buff = LuaAPI.lua_touserdata(L, index);
+				int e;
+                if (!CopyByValue_Gen.UnPack(buff, 0, out e))
+                {
+                    throw new Exception("unpack fail for Assets.Scripts.LuaObjects.CheckEnum2");
+                }
+				val = (Assets.Scripts.LuaObjects.CheckEnum2)e;
+                
+            }
+            else
+            {
+                val = (Assets.Scripts.LuaObjects.CheckEnum2)thiz.objectCasters.GetCaster(typeof(Assets.Scripts.LuaObjects.CheckEnum2))(L, index, null);
+            }
+        }
+		
+        public static void UpdateAssetsScriptsLuaObjectsCheckEnum2(this ObjectTranslator thiz, RealStatePtr L, int index, Assets.Scripts.LuaObjects.CheckEnum2 val)
+        {
+		    
+            if (LuaAPI.lua_type(L, index) == LuaTypes.LUA_TUSERDATA)
+            {
+			    if (LuaAPI.xlua_gettypeid(L, index) != AssetsScriptsLuaObjectsCheckEnum2_TypeID)
+				{
+				    throw new Exception("invalid userdata for Assets.Scripts.LuaObjects.CheckEnum2");
+				}
+				
+                IntPtr buff = LuaAPI.lua_touserdata(L, index);
+                if (!CopyByValue_Gen.Pack(buff, 0,  (int)val))
+                {
+                    throw new Exception("pack fail for Assets.Scripts.LuaObjects.CheckEnum2 ,value="+val);
+                }
+            }
+			
+            else
+            {
+                throw new Exception("try to update a data with lua type:" + LuaAPI.lua_type(L, index));
+            }
+        }
+        
+        static int AssetsScriptsLuaObjectsCheckEnum23_TypeID = -1;
+		static int AssetsScriptsLuaObjectsCheckEnum23_EnumRef = -1;
+        
+        public static void PushAssetsScriptsLuaObjectsCheckEnum23(this ObjectTranslator thiz, RealStatePtr L, Assets.Scripts.LuaObjects.CheckEnum23 val)
+        {
+            if (AssetsScriptsLuaObjectsCheckEnum23_TypeID == -1)
+            {
+			    bool is_first;
+                AssetsScriptsLuaObjectsCheckEnum23_TypeID = thiz.getTypeId(L, typeof(Assets.Scripts.LuaObjects.CheckEnum23), out is_first);
+				
+				if (AssetsScriptsLuaObjectsCheckEnum23_EnumRef == -1)
+				{
+				    Utils.LoadCSTable(L, typeof(Assets.Scripts.LuaObjects.CheckEnum23));
+				    AssetsScriptsLuaObjectsCheckEnum23_EnumRef = LuaAPI.luaL_ref(L, LuaIndexes.LUA_REGISTRYINDEX);
+				}
+				
+            }
+			
+			if (LuaAPI.xlua_tryget_cachedud(L, (int)val, AssetsScriptsLuaObjectsCheckEnum23_EnumRef) == 1)
+            {
+			    return;
+			}
+			
+            IntPtr buff = LuaAPI.xlua_pushstruct(L, 4, AssetsScriptsLuaObjectsCheckEnum23_TypeID);
+            if (!CopyByValue_Gen.Pack(buff, 0, (int)val))
+            {
+                throw new Exception("pack fail fail for Assets.Scripts.LuaObjects.CheckEnum23 ,value="+val);
+            }
+			
+			LuaAPI.lua_getref(L, AssetsScriptsLuaObjectsCheckEnum23_EnumRef);
+			LuaAPI.lua_pushvalue(L, -2);
+			LuaAPI.xlua_rawseti(L, -2, (int)val);
+			LuaAPI.lua_pop(L, 1);
+			
+        }
+		
+        public static void GetAssetsScriptsLuaObjectsCheckEnum23(this ObjectTranslator thiz, RealStatePtr L, int index, out Assets.Scripts.LuaObjects.CheckEnum23 val)
+        {
+		    LuaTypes type = LuaAPI.lua_type(L, index);
+            if (type == LuaTypes.LUA_TUSERDATA )
+            {
+			    if (LuaAPI.xlua_gettypeid(L, index) != AssetsScriptsLuaObjectsCheckEnum23_TypeID)
+				{
+				    throw new Exception("invalid userdata for Assets.Scripts.LuaObjects.CheckEnum23");
+				}
+				
+                IntPtr buff = LuaAPI.lua_touserdata(L, index);
+				int e;
+                if (!CopyByValue_Gen.UnPack(buff, 0, out e))
+                {
+                    throw new Exception("unpack fail for Assets.Scripts.LuaObjects.CheckEnum23");
+                }
+				val = (Assets.Scripts.LuaObjects.CheckEnum23)e;
+                
+            }
+            else
+            {
+                val = (Assets.Scripts.LuaObjects.CheckEnum23)thiz.objectCasters.GetCaster(typeof(Assets.Scripts.LuaObjects.CheckEnum23))(L, index, null);
+            }
+        }
+		
+        public static void UpdateAssetsScriptsLuaObjectsCheckEnum23(this ObjectTranslator thiz, RealStatePtr L, int index, Assets.Scripts.LuaObjects.CheckEnum23 val)
+        {
+		    
+            if (LuaAPI.lua_type(L, index) == LuaTypes.LUA_TUSERDATA)
+            {
+			    if (LuaAPI.xlua_gettypeid(L, index) != AssetsScriptsLuaObjectsCheckEnum23_TypeID)
+				{
+				    throw new Exception("invalid userdata for Assets.Scripts.LuaObjects.CheckEnum23");
+				}
+				
+                IntPtr buff = LuaAPI.lua_touserdata(L, index);
+                if (!CopyByValue_Gen.Pack(buff, 0,  (int)val))
+                {
+                    throw new Exception("pack fail for Assets.Scripts.LuaObjects.CheckEnum23 ,value="+val);
+                }
+            }
+			
+            else
+            {
+                throw new Exception("try to update a data with lua type:" + LuaAPI.lua_type(L, index));
+            }
+        }
+        
         
 		// table cast optimze
 		
@@ -616,6 +871,24 @@ namespace XLua
 				translator.PushUnityEngineRay2D(L, array[index]);
 				return true;
 			}
+			else if (type == typeof(Assets.Scripts.LuaObjects.CheckEnum[]))
+			{
+			    Assets.Scripts.LuaObjects.CheckEnum[] array = obj as Assets.Scripts.LuaObjects.CheckEnum[];
+				translator.PushAssetsScriptsLuaObjectsCheckEnum(L, array[index]);
+				return true;
+			}
+			else if (type == typeof(Assets.Scripts.LuaObjects.CheckEnum2[]))
+			{
+			    Assets.Scripts.LuaObjects.CheckEnum2[] array = obj as Assets.Scripts.LuaObjects.CheckEnum2[];
+				translator.PushAssetsScriptsLuaObjectsCheckEnum2(L, array[index]);
+				return true;
+			}
+			else if (type == typeof(Assets.Scripts.LuaObjects.CheckEnum23[]))
+			{
+			    Assets.Scripts.LuaObjects.CheckEnum23[] array = obj as Assets.Scripts.LuaObjects.CheckEnum23[];
+				translator.PushAssetsScriptsLuaObjectsCheckEnum23(L, array[index]);
+				return true;
+			}
             return false;
 		}
 		
@@ -667,6 +940,24 @@ namespace XLua
 			else if (type == typeof(UnityEngine.Ray2D[]))
 			{
 			    UnityEngine.Ray2D[] array = obj as UnityEngine.Ray2D[];
+				translator.Get(L, obj_idx, out array[array_idx]);
+				return true;
+			}
+			else if (type == typeof(Assets.Scripts.LuaObjects.CheckEnum[]))
+			{
+			    Assets.Scripts.LuaObjects.CheckEnum[] array = obj as Assets.Scripts.LuaObjects.CheckEnum[];
+				translator.Get(L, obj_idx, out array[array_idx]);
+				return true;
+			}
+			else if (type == typeof(Assets.Scripts.LuaObjects.CheckEnum2[]))
+			{
+			    Assets.Scripts.LuaObjects.CheckEnum2[] array = obj as Assets.Scripts.LuaObjects.CheckEnum2[];
+				translator.Get(L, obj_idx, out array[array_idx]);
+				return true;
+			}
+			else if (type == typeof(Assets.Scripts.LuaObjects.CheckEnum23[]))
+			{
+			    Assets.Scripts.LuaObjects.CheckEnum23[] array = obj as Assets.Scripts.LuaObjects.CheckEnum23[];
 				translator.Get(L, obj_idx, out array[array_idx]);
 				return true;
 			}

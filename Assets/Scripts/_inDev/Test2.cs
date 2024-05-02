@@ -18,34 +18,7 @@ public class Test2 : MonoBehaviour
 
     private void Start()
     {
-        LuaEnv env = new LuaEnv();
-        MoveCommand move = new MoveCommand(0.7f, true, transform);
-        SayCommand say = new SayCommand(0, true);
-        cat = new CatLua(this, move, say);
-        string s = @"
-        print(Commands)
-        print(Commands['Say'])
-        Commands['Say']()
-        x = 1
-        print(x)
-        Move(Vector3.up * x)
-        Move(Vector3.right * x)
-        Move(Vector3.down * x)
-        Move(Vector3.left * x)
-        print(Say('sss', 'aaa'))
-        Say('bbb', 'vvv')
-        x = x + 1
-        print(x)
-    ";
-
-        mainEnv = new ScriptEnvironment(
-            env, 
-            cat, 
-            s, 
-            new DefaultLuaTablePreparer(),
-            new DefaultLuaScriptPreparer());
-
-        act = mainEnv.GetScriptAs<Action>();
+        
     }
 
 
@@ -58,7 +31,35 @@ public class Test2 : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
+            LuaEnv env = new LuaEnv();
+            MoveCommand move = new MoveCommand(0.7f, true, transform);
+            SayCommand say = new SayCommand(0, true);
+            cat = new CatLua(this, move, say);
+            string s = @"
+        print(CheckEnum.A)
+        print(CheckEnum.B)
+        print(CheckEnum.C)
+        print(CheckEnum.D)
+        x = 1
+        print(x)
+        Move(Vector3.up * x)
+        Move(Vector3.right * x)
+        Move(Vector3.down * x)
+        Move(Vector3.left * x)
+        print(Say('sss', 'aaa'))
+        Say('bbb', 'vvv')
+        x = x + 1
+        print(x)
+    ";
 
+            mainEnv = new ScriptEnvironment(
+                env,
+                cat,
+                s,
+                new DefaultLuaTablePreparer(),
+                new DefaultLuaScriptPreparer());
+
+            act = mainEnv.GetScriptAs<Action>();
         }
     }
 }

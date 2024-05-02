@@ -4,6 +4,10 @@
 
 	<assembly fullname="Assembly-CSharp">
 	    <type fullname="Assets.Scripts.LuaObjects.CatLua" preserve="all"/>
+		<type fullname="Assets.Scripts.LuaObjects.CheckEnum" preserve="all"/>
+		<type fullname="Assets.Scripts.LuaObjects.CheckEnum2" preserve="all"/>
+		<type fullname="Assets.Scripts.LuaObjects.CheckEnum23" preserve="all"/>
+		<type fullname="Assets.Scripts.LuaIntegration.InjectableInLua" preserve="all"/>
 		<type fullname="Assets.Scripts.LuaIntegration.LuaCsCommand" preserve="all"/>
 		<type fullname="Assets.Scripts.LuaCommands.SayCommand" preserve="all"/>
 		

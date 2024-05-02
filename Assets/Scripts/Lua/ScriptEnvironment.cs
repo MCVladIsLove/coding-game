@@ -48,5 +48,17 @@ namespace Assets.Scripts.LuaIntegration
         {
             return _scriptTable.Get<bool>("__isScriptRunningRESERVEDVALUE");
         }
+
+        public void ExecuteScript() // todo: DO NEXT
+        {
+
+        }
+
+        public void SetScript(string script)
+        {
+            _currentScript = script;
+
+
+        }
     }
 }

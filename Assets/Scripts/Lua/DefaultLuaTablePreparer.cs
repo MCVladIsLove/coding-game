@@ -16,6 +16,26 @@ namespace Assets.Scripts.LuaIntegration
             table.SetMetaTable(meta);
             meta.Dispose();
             SetDefaultTableMembers(luaEnv, table);
+            SetEnumsInTable(luaEnv, table, injectedObject);
+
+            //   foreach (var en in Enum.GetNames(typeof(Assets.Scripts.LuaObjects.CheckEnum))) { }
+            //    UnityEngine.Debug.Log(en);
+
+            //  foreach (var en in Enum.GetNames(table.Get<LuaTable>("CheckEnum").Get<Type>("UnderlyingSystemType"))) { }
+            //   UnityEngine.Debug.Log(en);
+
+            //  foreach (var en in table.Get<LuaTable>("CheckEnum").GetKeys()) { }
+            //    UnityEngine.Debug.Log(en);
+
+
+
+
+            //  UnityEngine.Debug.Log(table.Get<LuaTable>("CheckEnum").Get<Type>("UnderlyingSystemType"));
+
+            //foreach (var v in table.GetKeys())
+            {
+             //   UnityEngine.Debug.Log(v);
+            }
         }
         private void ConfigureMetaTable(LuaTable meta, LuaEnv luaEnv, InjectableInLua injectedObject)
         {
@@ -67,6 +87,24 @@ namespace Assets.Scripts.LuaIntegration
             table.Set("assert", luaEnv.Global.Get<LuaFunction>("assert"));
             table.Set("coroutine", luaEnv.Global.Get<LuaTable>("coroutine"));
             table.Set("self", table);
+        }
+        private void SetEnumsInTable(LuaEnv luaEnv, LuaTable table, InjectableInLua injectedObject)
+        {
+            List<Type> enums = new List<Type>();
+            MethodInfo[] methods = injectedObject.GetType().GetMethods();
+
+            foreach (MethodInfo m in methods)
+            {
+                enums.AddRange(m.GetParameters()
+                    .Select(x => x.ParameterType)
+                    .Where(x => x.IsEnum));
+            }
+            enums = enums.Distinct().ToList();
+
+            foreach (Type enumType in enums)
+            {
+                table.Set(enumType.Name, luaEnv.Global.GetInPath<LuaTable>("CS." + enumType.FullName));
+            }
         }
     }
 }
