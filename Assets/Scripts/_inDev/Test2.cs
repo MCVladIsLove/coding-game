@@ -12,13 +12,13 @@ public class Test2 : MonoBehaviour
 {
     ScriptEnvironment mainEnv;
     CatLua cat;
-
+    LuaEnv env;
     Action act;
 
 
     private void Start()
     {
-        
+        env = new LuaEnv();
     }
 
 
@@ -26,12 +26,11 @@ public class Test2 : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (!mainEnv.IsScriptRunning())
+            if (!mainEnv.IsScriptRunning)
                 act();
         }
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            LuaEnv env = new LuaEnv();
             MoveCommand move = new MoveCommand(0.7f, true, transform);
             SayCommand say = new SayCommand(0, true);
             cat = new CatLua(this, move, say);
@@ -40,6 +39,7 @@ public class Test2 : MonoBehaviour
         print(CheckEnum.B)
         print(CheckEnum.C)
         print(CheckEnum.D)
+        print(self)
         x = 1
         print(x)
         Move(Vector3.up * x)
@@ -59,7 +59,54 @@ public class Test2 : MonoBehaviour
                 new DefaultLuaTablePreparer(),
                 new DefaultLuaScriptPreparer());
 
-            act = mainEnv.GetScriptAs<Action>();
+            act = mainEnv.GetScriptAsDelegate();
+        }
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            string script2 = @"
+            print('Hello from second script')
+            print('Now i Move left')
+            Move(Vector3.left)
+            Move(Vector3.left)
+            Move(Vector3.left)
+            Say('I', ' Reached the end')
+";
+            mainEnv.SetScript(script2);
+            mainEnv.ReloadTable();
+            act = mainEnv.GetScriptAsDelegate();
+        }
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            string script3 = @"
+            print('Hello from third script')
+            print('Now i Move right')
+            Move(Vector3.right)
+            Move(Vector3.right)
+            Move(Vector3.right)
+            Say('I', ' Reached the end')
+";
+            mainEnv.SetScript(script3);
+            mainEnv.ReloadTable();
+            act = mainEnv.GetScriptAsDelegate();
+        }
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            string script2 = @"
+            print('Hello from second script')
+            print('Now i Move left')
+            Move(Vector3.left)
+            Move(Vector3.left)
+            Move(Vector3.left)
+            Say('I', ' Reached the end')
+";
+            mainEnv.SetScript(script2);
+            mainEnv.ReloadTable();
+            act = mainEnv.GetScriptAsDelegate();
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            mainEnv.Reset();
+            act = mainEnv.GetScriptAsDelegate();
         }
     }
 }

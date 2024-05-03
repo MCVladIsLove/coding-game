@@ -10,15 +10,17 @@ namespace Assets.Scripts.LuaIntegration
         private LuaTable _scriptTable;
 
         private ILuaTablePreparer _luaTablePreparer;
-        private ILuaScriptPreparer _luaScriptPreparer; 
+        private ILuaScriptPreparer _luaScriptPreparer;
 
         private string _currentScript;
         private string _defaultScript;
 
-        public ScriptEnvironment(LuaEnv luaEnv, 
-            InjectableInLua injectedObject, 
-            string defaultScript, 
-            ILuaTablePreparer tablePreparer, 
+        public bool IsScriptRunning => _scriptTable.Get<bool>("__isScriptRunningRESERVEDVALUE");
+
+        public ScriptEnvironment(LuaEnv luaEnv,
+            InjectableInLua injectedObject,
+            string defaultScript,
+            ILuaTablePreparer tablePreparer,
             ILuaScriptPreparer scriptPreparer)
         {
             _luaEnv = luaEnv;
@@ -36,29 +38,29 @@ namespace Assets.Scripts.LuaIntegration
             _luaTablePreparer.PrepareTable(_luaEnv, _scriptTable, _injectedObject);
         }
 
-        public T GetScriptAs<T>()
+        public Action GetScriptAsDelegate()
         {
             string preparedScript = _luaScriptPreparer.PrepareScript(_currentScript, _injectedObject);
             _luaEnv.DoString(preparedScript, env: _scriptTable);
-            
-            return _scriptTable.Get<T>("__scriptAsFunction");
+
+            return _scriptTable.Get<Action>("__scriptAsFunction");
         }
 
-        public bool IsScriptRunning()
+        public void SetScript(string newScript)
         {
-            return _scriptTable.Get<bool>("__isScriptRunningRESERVEDVALUE");
+            _currentScript = newScript;
         }
 
-        public void ExecuteScript() // todo: DO NEXT
+        public void ReloadTable()
         {
-
+            _scriptTable.Dispose();
+            CreateTable();
         }
 
-        public void SetScript(string script)
+        public void Reset()
         {
-            _currentScript = script;
-
-
+            SetScript(_defaultScript);
+            ReloadTable();
         }
     }
 }
