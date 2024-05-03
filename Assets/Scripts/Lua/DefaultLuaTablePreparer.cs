@@ -37,6 +37,7 @@ namespace Assets.Scripts.LuaIntegration
              //   UnityEngine.Debug.Log(v);
             }
         }
+
         private void ConfigureMetaTable(LuaTable meta, LuaEnv luaEnv, InjectableInLua injectedObject)
         {
             meta.Set("_G", luaEnv.Global);
@@ -50,9 +51,20 @@ namespace Assets.Scripts.LuaIntegration
             asyncTable = { 
                 " + asyncCommands + @"
             }
+            
+            hideMembersTable = {
+                GetType = 1,
+                Commands = 1,
+                Equals = 1,
+                GetHashCode = 1,
+                ToString = 1
+            }
 
             __index = function (table, key)
-    
+                if hideMembersTable[key] ~= nil then
+                    return nil
+                end
+
                 if asyncTable[key] ~= nil then
                     return function(...) return asyncTable[key](__scriptTable, ...) end
                 end
@@ -63,6 +75,7 @@ namespace Assets.Scripts.LuaIntegration
                 return __scriptTable[key]
             end", env: meta);
         }
+
         private string GetAsyncFunctionsTableCode(List<LuaCsCommand> commands)
         {
             StringBuilder asyncCommands = new StringBuilder();
@@ -85,9 +98,10 @@ namespace Assets.Scripts.LuaIntegration
             table.Set("__isScriptRunningRESERVEDVALUE", false);
             table.Set("print", luaEnv.Global.Get<LuaFunction>("print"));
             table.Set("assert", luaEnv.Global.Get<LuaFunction>("assert"));
-            table.Set("coroutine", luaEnv.Global.Get<LuaTable>("coroutine"));
+            table.Set("coroutine", luaEnv.Global.Get<LuaTable>("coroutine")); //todo: rename
             table.Set("self", table);
         }
+
         private void SetEnumsInTable(LuaEnv luaEnv, LuaTable table, InjectableInLua injectedObject)
         {
             List<Type> enums = new List<Type>();
