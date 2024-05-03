@@ -9,11 +9,14 @@ namespace Assets.Scripts.LuaIntegration
     {
         protected Dictionary<string, LuaCsCommand> _commands = new Dictionary<string, LuaCsCommand>();
         protected MonoBehaviour _parentBehaviour;
+        protected AsyncCommandsController _asyncCommandsController;
 
+        public AsyncCommandsController AsyncCommandsController => _asyncCommandsController;
         public Dictionary<string, LuaCsCommand> Commands => _commands;
 
         public InjectableInLua(MonoBehaviour parentBehaviour)
         {
+            _asyncCommandsController = new AsyncCommandsController(parentBehaviour);
             _parentBehaviour = parentBehaviour;
         }
 
@@ -21,5 +24,6 @@ namespace Assets.Scripts.LuaIntegration
         {
             _commands.Add(command.CallName, command);
         }
+
     }
 }

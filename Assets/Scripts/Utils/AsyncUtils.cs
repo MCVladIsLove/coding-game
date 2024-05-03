@@ -6,9 +6,9 @@ namespace Assets.Scripts.Utils
 {
     public static class AsyncUtils
     {
-        public static void ExecuteAfter(MonoBehaviour coroutineRunner, float time, Action onFinish)
+        public static Coroutine ExecuteAfter(MonoBehaviour coroutineRunner, float time, Action onFinish)
         {
-            coroutineRunner.StartCoroutine(Wait(time, onFinish));
+            return coroutineRunner.StartCoroutine(Wait(time, onFinish));
         }
 
         private static IEnumerator Wait(float time, Action onFinish)

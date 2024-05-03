@@ -57,7 +57,8 @@ namespace Assets.Scripts.LuaIntegration
                 Commands = 1,
                 Equals = 1,
                 GetHashCode = 1,
-                ToString = 1
+                ToString = 1,
+                AsyncCommandsController = 1
             }
 
             __index = function (table, key)

@@ -53,6 +53,8 @@ namespace Assets.Scripts.LuaIntegration
 
         public void ReloadTable()
         {
+            if (IsScriptRunning)
+                _injectedObject.AsyncCommandsController.StopAsyncExecution();
             _scriptTable.Dispose();
             CreateTable();
         }

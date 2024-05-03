@@ -25,7 +25,7 @@ namespace Assets.Scripts.LuaObjects
 
         public void Move(Vector3 moveDirection, Action notifyFinish = null)
         {
-            AsyncUtils.ExecuteAfter(_parentBehaviour, _moveCommand.ExecutionTime, () =>
+            _asyncCommandsController.RunAsyncCommand(_moveCommand.ExecutionTime, () =>
             {
                 _moveCommand.SetExecutionParams(moveDirection);
                 _moveCommand.Execute();

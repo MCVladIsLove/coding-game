@@ -3,7 +3,7 @@
 namespace Assets.Scripts.LuaIntegration
 {
     [LuaCallCSharp]
-    public abstract class LuaCsCommand
+    public abstract class LuaCsCommand // todo: BUILDER!!!!!
     {
         protected float _executionTime;
         protected bool _isAvaliable;
