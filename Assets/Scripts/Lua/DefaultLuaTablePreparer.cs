@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Linq;
 using System.Collections.Generic;
 using System;
+using Assets.Scripts.StringConstants;
 
 namespace Assets.Scripts.LuaIntegration
 {
@@ -41,36 +42,36 @@ namespace Assets.Scripts.LuaIntegration
         private void ConfigureMetaTable(LuaTable meta, LuaEnv luaEnv, InjectableInLua injectedObject)
         {
             meta.Set("_G", luaEnv.Global);
-            meta.Set("__scriptTable", injectedObject);
+            meta.Set(LuaScriptReservedMemberNames.INJECTED_TABLE, injectedObject);
 
             string asyncCommands = GetAsyncFunctionsTableCode(injectedObject.Commands.Values.ToList());
 
-            luaEnv.DoString(@"
+            luaEnv.DoString($@"
             util = _G.require 'xlua.util'
             
-            function __suspendCoroutineOneFrame(suspendedCoroutine)
-                __scriptTable.AsyncCommandsController:RunLoopIteration(function() 
+            function {LuaScriptReservedMemberNames.SUSPEND_COROUTINE_ONE_FRAME}(suspendedCoroutine)
+                {LuaScriptReservedMemberNames.INJECTED_TABLE}.AsyncCommandsController:RunLoopIteration(function() 
                     _G.assert(_G.coroutine.resume(suspendedCoroutine)) 
                 end)
                 _G.coroutine.yield()
             end
             
-            reservedMembersTable = {
-                __suspendCoroutineOneFrame = __suspendCoroutineOneFrame
-            }
+            reservedMembersTable = {{
+                {LuaScriptReservedMemberNames.SUSPEND_COROUTINE_ONE_FRAME} = {LuaScriptReservedMemberNames.SUSPEND_COROUTINE_ONE_FRAME}
+            }}
 
-            asyncTable = { 
-                " + asyncCommands + @"
-            }
+            asyncTable = {{ 
+                " + asyncCommands + $@"
+            }}
             
-            hideMembersTable = {
+            hideMembersTable = {{
                 GetType = 1,
                 Commands = 1,
                 Equals = 1,
                 GetHashCode = 1,
                 ToString = 1,
                 AsyncCommandsController = 1
-            }
+            }}
 
             __index = function (table, key)
                 if reservedMembersTable[key] ~= nil then
@@ -82,13 +83,13 @@ namespace Assets.Scripts.LuaIntegration
                 end
 
                 if asyncTable[key] ~= nil then
-                    return function(...) return asyncTable[key](__scriptTable, ...) end
+                    return function(...) return asyncTable[key]({LuaScriptReservedMemberNames.INJECTED_TABLE}, ...) end
                 end
 
-                if _G.type(__scriptTable[key]) == 'function' then 
-                    return function (...) return __scriptTable[key](__scriptTable, ...) end
+                if _G.type({LuaScriptReservedMemberNames.INJECTED_TABLE}[key]) == 'function' then 
+                    return function (...) return {LuaScriptReservedMemberNames.INJECTED_TABLE}[key]({LuaScriptReservedMemberNames.INJECTED_TABLE}, ...) end
                 end
-                return __scriptTable[key]
+                return {LuaScriptReservedMemberNames.INJECTED_TABLE}[key]
             end", env: meta);
         }
 
@@ -100,7 +101,7 @@ namespace Assets.Scripts.LuaIntegration
             {
                 if (command.IsAsync)
                     asyncCommands.Append(command.CallName)
-                        .Append(" = util.async_to_sync(__scriptTable.")
+                        .Append($" = util.async_to_sync({LuaScriptReservedMemberNames.INJECTED_TABLE}.")
                         .Append(command.CallName)
                         .AppendLine(")");
             }
@@ -111,10 +112,10 @@ namespace Assets.Scripts.LuaIntegration
         private void SetDefaultTableMembers(LuaEnv luaEnv, LuaTable table)
         {
             table.Set("Vector3", luaEnv.Global.GetInPath<LuaTable>("CS.UnityEngine.Vector3")); //todo: delete
-            table.Set("__isScriptRunningRESERVEDVALUE", false);
+            table.Set(LuaScriptReservedMemberNames.IS_SCRIPT_RUNNING, false);
             table.Set("print", luaEnv.Global.Get<LuaFunction>("print"));
             table.Set("assert", luaEnv.Global.Get<LuaFunction>("assert"));
-            table.Set("coroutine", luaEnv.Global.Get<LuaTable>("coroutine")); //todo: rename
+            table.Set(LuaScriptReservedMemberNames.COROUTINE_TABLE, luaEnv.Global.Get<LuaTable>("coroutine"));
             table.Set("self", table);
         }
 

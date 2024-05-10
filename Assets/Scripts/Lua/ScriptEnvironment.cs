@@ -1,5 +1,6 @@
 ﻿using System;
 using XLua;
+using Assets.Scripts.StringConstants;
 
 namespace Assets.Scripts.LuaIntegration
 {
@@ -15,7 +16,7 @@ namespace Assets.Scripts.LuaIntegration
         private string _currentScript;
         private string _defaultScript;
 
-        public bool IsScriptRunning => _scriptTable.Get<bool>("__isScriptRunningRESERVEDVALUE");
+        public bool IsScriptRunning => _scriptTable.Get<bool>(LuaScriptReservedMemberNames.IS_SCRIPT_RUNNING);
 
         public ScriptEnvironment(LuaEnv luaEnv,
             InjectableInLua injectedObject,
@@ -43,7 +44,7 @@ namespace Assets.Scripts.LuaIntegration
             string preparedScript = _luaScriptPreparer.PrepareScript(_currentScript, _injectedObject);
             _luaEnv.DoString(preparedScript, env: _scriptTable);
 
-            return _scriptTable.Get<Action>("__scriptAsFunction");
+            return _scriptTable.Get<Action>(LuaScriptReservedMemberNames.SCRIPT_AS_FUNCTION);
         }
 
         public void SetScript(string newScript)

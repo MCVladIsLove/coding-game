@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using System.Text.RegularExpressions;
+using Assets.Scripts.StringConstants;
 
 namespace Assets.Scripts.LuaIntegration
 {
@@ -9,11 +10,10 @@ namespace Assets.Scripts.LuaIntegration
         {
             StringBuilder scriptBuilder = new StringBuilder();
 
-            scriptBuilder.AppendLine("__isScriptRunningRESERVEDVALUE = true")
+            scriptBuilder.Append(LuaScriptReservedMemberNames.IS_SCRIPT_RUNNING).AppendLine(" = true")
                 .AppendLine(script)
-                .AppendLine("__isScriptRunningRESERVEDVALUE = false");
-
-
+                .Append(LuaScriptReservedMemberNames.IS_SCRIPT_RUNNING).AppendLine(" = false");
+            
             StringBuilder regexBuilder = new StringBuilder(@"(");
 
             bool addSeparator = false;
@@ -32,14 +32,14 @@ namespace Assets.Scripts.LuaIntegration
             Regex loopStartRegex = new Regex(@"(while\s.*?do|for\s.*?do|repeat)", RegexOptions.Singleline);
 
             if (asyncCommandsRegex.IsMatch(script) || loopsRegex.IsMatch(script))
-                scriptBuilder.Insert(0, "co = coroutine.create(function() ")
-                    .AppendLine("end) assert(coroutine.resume(co))");
+                scriptBuilder.Insert(0, $"{LuaScriptReservedMemberNames.MAIN_COROUTINE} = {LuaScriptReservedMemberNames.COROUTINE_TABLE}.create(function() ")
+                    .AppendLine($"end) assert({LuaScriptReservedMemberNames.COROUTINE_TABLE}.resume({LuaScriptReservedMemberNames.MAIN_COROUTINE}))");
 
-            scriptBuilder.Insert(0, "function __scriptAsFunction()")
+            scriptBuilder.Insert(0, $"function {LuaScriptReservedMemberNames.SCRIPT_AS_FUNCTION}()")
                 .AppendLine("end");
 
             return loopStartRegex.Replace(scriptBuilder.ToString(),
-                match => match.Value + " \n__suspendCoroutineOneFrame(co)\n");
+                match => match.Value + $" \n{LuaScriptReservedMemberNames.SUSPEND_COROUTINE_ONE_FRAME}({LuaScriptReservedMemberNames.MAIN_COROUTINE})\n");
         }
     }
 }
