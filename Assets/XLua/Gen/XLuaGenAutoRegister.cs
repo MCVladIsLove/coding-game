@@ -34,6 +34,9 @@ namespace XLua.CSObjectWrap
             translator.DelayWrapLoader(typeof(Assets.Scripts.LuaObjects.CheckEnum23), AssetsScriptsLuaObjectsCheckEnum23Wrap.__Register);
         
         
+            translator.DelayWrapLoader(typeof(Assets.Scripts.LuaIntegration.AsyncCommandsController), AssetsScriptsLuaIntegrationAsyncCommandsControllerWrap.__Register);
+        
+        
             translator.DelayWrapLoader(typeof(Assets.Scripts.LuaIntegration.InjectableInLua), AssetsScriptsLuaIntegrationInjectableInLuaWrap.__Register);
         
         

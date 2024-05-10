@@ -21,11 +21,12 @@ namespace XLua.CSObjectWrap
         {
 			ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
 			System.Type type = typeof(Assets.Scripts.LuaIntegration.InjectableInLua);
-			Utils.BeginObjectRegister(type, L, translator, 0, 0, 1, 0);
+			Utils.BeginObjectRegister(type, L, translator, 0, 0, 2, 0);
 			
 			
 			
-			Utils.RegisterFunc(L, Utils.GETTER_IDX, "Commands", _g_get_Commands);
+			Utils.RegisterFunc(L, Utils.GETTER_IDX, "AsyncCommandsController", _g_get_AsyncCommandsController);
+            Utils.RegisterFunc(L, Utils.GETTER_IDX, "Commands", _g_get_Commands);
             
 			
 			
@@ -57,6 +58,20 @@ namespace XLua.CSObjectWrap
         
         
         
+        
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        static int _g_get_AsyncCommandsController(RealStatePtr L)
+        {
+		    try {
+                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
+			
+                Assets.Scripts.LuaIntegration.InjectableInLua gen_to_be_invoked = (Assets.Scripts.LuaIntegration.InjectableInLua)translator.FastGetCSObj(L, 1);
+                translator.Push(L, gen_to_be_invoked.AsyncCommandsController);
+            } catch(System.Exception gen_e) {
+                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
+            }
+            return 1;
+        }
         
         [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
         static int _g_get_Commands(RealStatePtr L)

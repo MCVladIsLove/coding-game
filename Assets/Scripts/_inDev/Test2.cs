@@ -12,12 +12,15 @@ public class Test2 : MonoBehaviour
 {
     ScriptEnvironment mainEnv;
     CatLua cat;
-    LuaEnv env;
+    static LuaEnv env;
     Action act;
 
 
     private void Start()
     {
+        if (env != null)
+            return;
+        
         env = new LuaEnv();
     }
 
@@ -35,21 +38,21 @@ public class Test2 : MonoBehaviour
             SayCommand say = new SayCommand(0, true);
             cat = new CatLua(this, move, say);
             string s = @"
-        print(CheckEnum.A)
-        print(CheckEnum.B)
-        print(CheckEnum.C)
-        print(CheckEnum.D)
-        print(self)
+       -- print(CheckEnum.A)
+        --print(CheckEnum.B)
+        --print(CheckEnum.C)
+        --print(CheckEnum.D)
+        --print(self)
         x = 1
-        print(x)
+        --print(x)
         Move(Vector3.up * x)
         Move(Vector3.right * x)
         Move(Vector3.down * x)
         Move(Vector3.left * x)
-        print(Say('sss', 'aaa'))
-        Say('bbb', 'vvv')
+        --print(Say('sss', 'aaa'))
+        --Say('bbb', 'vvv')
         x = x + 1
-        print(x)
+        --print(x)
     ";
 
             mainEnv = new ScriptEnvironment(
@@ -64,12 +67,12 @@ public class Test2 : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.A))
         {
             string script2 = @"
-            print('Hello from second script')
-            print('Now i Move left')
+          --  print('Hello from second script')
+          --  print('Now i Move left')
             Move(Vector3.left)
             Move(Vector3.left)
             Move(Vector3.left)
-            Say('I', ' Reached the end')
+            --Say('I', ' Reached the end')
 ";
             mainEnv.SetScript(script2);
             mainEnv.ReloadTable();
@@ -108,5 +111,39 @@ public class Test2 : MonoBehaviour
             mainEnv.Reset();
             act = mainEnv.GetScriptAsDelegate();
         }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            string script2 = @"
+            Move(Vector3.up)            
+            i = 0
+            x = 0
+            e = 0
+            repeat
+                repeat
+                    e = 0
+                    while e < 20 do
+                        e = e + 1
+                            for s=0,10,1
+
+
+                            do
+                                print(s)
+                            end
+                     
+                        print(e)
+                    end
+                    print('hello from Infinite loop ' .. i)
+                    i = i + 1
+                until i > 99
+                i = 0
+                x = x + 1
+                print('XXXX ' .. x)
+            until x > 99
+";
+            mainEnv.SetScript(script2);
+            mainEnv.ReloadTable();
+            act = mainEnv.GetScriptAsDelegate();
+        }
+
     }
 }

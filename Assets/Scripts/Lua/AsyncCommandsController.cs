@@ -1,9 +1,12 @@
 ﻿using Assets.Scripts.Utils;
 using System;
+using System.Collections;
 using UnityEngine;
+using XLua;
 
 namespace Assets.Scripts.LuaIntegration
 {
+    [LuaCallCSharp]
     public class AsyncCommandsController
     {
         private Coroutine _activeCoroutine;
@@ -13,7 +16,19 @@ namespace Assets.Scripts.LuaIntegration
         {
             _coroutineRunner = coroutineRunner;
         }
-        
+
+        private IEnumerator WaitFrame(Action onFinish)
+        {
+            yield return 0;
+            RemoveAsyncCommand();
+            onFinish();
+        }
+
+        public void RunLoopIteration(Action onFinish)
+        {
+            _activeCoroutine = _coroutineRunner.StartCoroutine(WaitFrame(onFinish));
+        }
+
         private void TrackAsyncCommand(Coroutine routine)
         {
             _activeCoroutine = routine;
@@ -27,6 +42,7 @@ namespace Assets.Scripts.LuaIntegration
         public void StopAsyncExecution()
         {
             _coroutineRunner.StopCoroutine(_activeCoroutine);
+            RemoveAsyncCommand();
         }
 
         public void RunAsyncCommand(float executionTime, Action onFinish)

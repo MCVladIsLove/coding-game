@@ -28,14 +28,18 @@ namespace Assets.Scripts.LuaIntegration
             regexBuilder.Append(@")");
 
             Regex asyncCommandsRegex = new Regex(regexBuilder.ToString());
+            Regex loopsRegex = new Regex(@"(while|for|repeat)");
+            Regex loopStartRegex = new Regex(@"(while\s.*?do|for\s.*?do|repeat)", RegexOptions.Singleline);
 
-
-            if (asyncCommandsRegex.IsMatch(script))
+            if (asyncCommandsRegex.IsMatch(script) || loopsRegex.IsMatch(script))
                 scriptBuilder.Insert(0, "co = coroutine.create(function() ")
                     .AppendLine("end) assert(coroutine.resume(co))");
 
-            return scriptBuilder.Insert(0, "function __scriptAsFunction()")
-                .AppendLine("end").ToString();
+            scriptBuilder.Insert(0, "function __scriptAsFunction()")
+                .AppendLine("end");
+
+            return loopStartRegex.Replace(scriptBuilder.ToString(),
+                match => match.Value + " \n__suspendCoroutineOneFrame(co)\n");
         }
     }
 }

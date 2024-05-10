@@ -47,6 +47,17 @@ namespace Assets.Scripts.LuaIntegration
 
             luaEnv.DoString(@"
             util = _G.require 'xlua.util'
+            
+            function __suspendCoroutineOneFrame(suspendedCoroutine)
+                __scriptTable.AsyncCommandsController:RunLoopIteration(function() 
+                    _G.assert(_G.coroutine.resume(suspendedCoroutine)) 
+                end)
+                _G.coroutine.yield()
+            end
+            
+            reservedMembersTable = {
+                __suspendCoroutineOneFrame = __suspendCoroutineOneFrame
+            }
 
             asyncTable = { 
                 " + asyncCommands + @"
@@ -62,6 +73,10 @@ namespace Assets.Scripts.LuaIntegration
             }
 
             __index = function (table, key)
+                if reservedMembersTable[key] ~= nil then
+                    return reservedMembersTable[key]
+                end
+
                 if hideMembersTable[key] ~= nil then
                     return nil
                 end
