@@ -5,13 +5,13 @@ using Assets.Scripts.LuaIntegration;
 using XLua;
 using System.Text.RegularExpressions;
 using Assets.Scripts.LuaCommands;
-using Assets.Scripts.LuaObjects;
+using Assets.Scripts.LuaAPIs;
 using System;
 
 public class Test2 : MonoBehaviour
 {
     ScriptEnvironment mainEnv;
-    CatLua cat;
+    CatAPI cat;
     static LuaEnv env;
 
     private void Start()
@@ -41,7 +41,7 @@ public class Test2 : MonoBehaviour
         {
             MoveCommand move = new MoveCommand(0.7f, true, transform);
             SayCommand say = new SayCommand(0, true);
-            cat = new CatLua(this, move, say);
+            cat = new CatAPI(this, move, say);
             string s = @"
        -- print(CheckEnum.A)
         --print(CheckEnum.B)

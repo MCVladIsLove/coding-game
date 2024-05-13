@@ -22,22 +22,22 @@ namespace XLua.CSObjectWrap
         static void wrapInit0(LuaEnv luaenv, ObjectTranslator translator)
         {
         
-            translator.DelayWrapLoader(typeof(Assets.Scripts.LuaObjects.CatLua), AssetsScriptsLuaObjectsCatLuaWrap.__Register);
+            translator.DelayWrapLoader(typeof(Assets.Scripts.LuaAPIs.CatAPI), AssetsScriptsLuaAPIsCatAPIWrap.__Register);
         
         
-            translator.DelayWrapLoader(typeof(Assets.Scripts.LuaObjects.CheckEnum), AssetsScriptsLuaObjectsCheckEnumWrap.__Register);
+            translator.DelayWrapLoader(typeof(Assets.Scripts.LuaAPIs.CheckEnum), AssetsScriptsLuaAPIsCheckEnumWrap.__Register);
         
         
-            translator.DelayWrapLoader(typeof(Assets.Scripts.LuaObjects.CheckEnum2), AssetsScriptsLuaObjectsCheckEnum2Wrap.__Register);
+            translator.DelayWrapLoader(typeof(Assets.Scripts.LuaAPIs.CheckEnum2), AssetsScriptsLuaAPIsCheckEnum2Wrap.__Register);
         
         
-            translator.DelayWrapLoader(typeof(Assets.Scripts.LuaObjects.CheckEnum23), AssetsScriptsLuaObjectsCheckEnum23Wrap.__Register);
+            translator.DelayWrapLoader(typeof(Assets.Scripts.LuaAPIs.CheckEnum23), AssetsScriptsLuaAPIsCheckEnum23Wrap.__Register);
         
         
             translator.DelayWrapLoader(typeof(Assets.Scripts.LuaIntegration.AsyncCommandsController), AssetsScriptsLuaIntegrationAsyncCommandsControllerWrap.__Register);
         
         
-            translator.DelayWrapLoader(typeof(Assets.Scripts.LuaIntegration.InjectableInLua), AssetsScriptsLuaIntegrationInjectableInLuaWrap.__Register);
+            translator.DelayWrapLoader(typeof(Assets.Scripts.LuaIntegration.LuaAPI), AssetsScriptsLuaIntegrationLuaAPIWrap.__Register);
         
         
             translator.DelayWrapLoader(typeof(Assets.Scripts.LuaIntegration.LuaCsCommand), AssetsScriptsLuaIntegrationLuaCsCommandWrap.__Register);

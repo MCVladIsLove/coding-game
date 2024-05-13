@@ -5,17 +5,17 @@ using Assets.Scripts.Utils;
 using Assets.Scripts.LuaCommands;
 using Assets.Scripts.LuaIntegration;
 
-namespace Assets.Scripts.LuaObjects
+namespace Assets.Scripts.LuaAPIs
 {
     [LuaCallCSharp]
-    public class CatLua : InjectableInLua
+    public class CatAPI : LuaAPI
     {
         private MoveCommand _moveCommand;
         private SayCommand _sayCommand;
 
         public CheckEnum en;
 
-        public CatLua(MonoBehaviour coroutineRunner, MoveCommand moveCommand, SayCommand sayCommand) : base(coroutineRunner)
+        public CatAPI(MonoBehaviour coroutineRunner, MoveCommand moveCommand, SayCommand sayCommand) : base(coroutineRunner)
         {
             _moveCommand = moveCommand;
             _sayCommand = sayCommand;

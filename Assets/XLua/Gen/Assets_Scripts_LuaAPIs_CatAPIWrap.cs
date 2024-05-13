@@ -15,12 +15,12 @@ using System.Collections.Generic;
 namespace XLua.CSObjectWrap
 {
     using Utils = XLua.Utils;
-    public class AssetsScriptsLuaObjectsCatLuaWrap 
+    public class AssetsScriptsLuaAPIsCatAPIWrap 
     {
         public static void __Register(RealStatePtr L)
         {
 			ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
-			System.Type type = typeof(Assets.Scripts.LuaObjects.CatLua);
+			System.Type type = typeof(Assets.Scripts.LuaAPIs.CatAPI);
 			Utils.BeginObjectRegister(type, L, translator, 0, 4, 1, 1);
 			
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "Move", _m_Move);
@@ -59,7 +59,7 @@ namespace XLua.CSObjectWrap
 					Assets.Scripts.LuaCommands.MoveCommand _moveCommand = (Assets.Scripts.LuaCommands.MoveCommand)translator.GetObject(L, 3, typeof(Assets.Scripts.LuaCommands.MoveCommand));
 					Assets.Scripts.LuaCommands.SayCommand _sayCommand = (Assets.Scripts.LuaCommands.SayCommand)translator.GetObject(L, 4, typeof(Assets.Scripts.LuaCommands.SayCommand));
 					
-					var gen_ret = new Assets.Scripts.LuaObjects.CatLua(_coroutineRunner, _moveCommand, _sayCommand);
+					var gen_ret = new Assets.Scripts.LuaAPIs.CatAPI(_coroutineRunner, _moveCommand, _sayCommand);
 					translator.Push(L, gen_ret);
                     
 					return 1;
@@ -69,7 +69,7 @@ namespace XLua.CSObjectWrap
 			catch(System.Exception gen_e) {
 				return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
 			}
-            return LuaAPI.luaL_error(L, "invalid arguments to Assets.Scripts.LuaObjects.CatLua constructor!");
+            return LuaAPI.luaL_error(L, "invalid arguments to Assets.Scripts.LuaAPIs.CatAPI constructor!");
             
         }
         
@@ -88,7 +88,7 @@ namespace XLua.CSObjectWrap
                 ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
             
             
-                Assets.Scripts.LuaObjects.CatLua gen_to_be_invoked = (Assets.Scripts.LuaObjects.CatLua)translator.FastGetCSObj(L, 1);
+                Assets.Scripts.LuaAPIs.CatAPI gen_to_be_invoked = (Assets.Scripts.LuaAPIs.CatAPI)translator.FastGetCSObj(L, 1);
             
             
 			    int gen_param_count = LuaAPI.lua_gettop(L);
@@ -119,7 +119,7 @@ namespace XLua.CSObjectWrap
                 return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
             }
             
-            return LuaAPI.luaL_error(L, "invalid arguments to Assets.Scripts.LuaObjects.CatLua.Move!");
+            return LuaAPI.luaL_error(L, "invalid arguments to Assets.Scripts.LuaAPIs.CatAPI.Move!");
             
         }
         
@@ -131,7 +131,7 @@ namespace XLua.CSObjectWrap
                 ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
             
             
-                Assets.Scripts.LuaObjects.CatLua gen_to_be_invoked = (Assets.Scripts.LuaObjects.CatLua)translator.FastGetCSObj(L, 1);
+                Assets.Scripts.LuaAPIs.CatAPI gen_to_be_invoked = (Assets.Scripts.LuaAPIs.CatAPI)translator.FastGetCSObj(L, 1);
             
             
                 
@@ -161,14 +161,14 @@ namespace XLua.CSObjectWrap
                 ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
             
             
-                Assets.Scripts.LuaObjects.CatLua gen_to_be_invoked = (Assets.Scripts.LuaObjects.CatLua)translator.FastGetCSObj(L, 1);
+                Assets.Scripts.LuaAPIs.CatAPI gen_to_be_invoked = (Assets.Scripts.LuaAPIs.CatAPI)translator.FastGetCSObj(L, 1);
             
             
                 
                 {
-                    Assets.Scripts.LuaObjects.CheckEnum _d;translator.Get(L, 2, out _d);
-                    Assets.Scripts.LuaObjects.CheckEnum2 _dd;translator.Get(L, 3, out _dd);
-                    Assets.Scripts.LuaObjects.CheckEnum2 _ddd;translator.Get(L, 4, out _ddd);
+                    Assets.Scripts.LuaAPIs.CheckEnum _d;translator.Get(L, 2, out _d);
+                    Assets.Scripts.LuaAPIs.CheckEnum2 _dd;translator.Get(L, 3, out _dd);
+                    Assets.Scripts.LuaAPIs.CheckEnum2 _ddd;translator.Get(L, 4, out _ddd);
                     
                     gen_to_be_invoked.SSSS( _d, _dd, _ddd );
                     
@@ -191,12 +191,12 @@ namespace XLua.CSObjectWrap
                 ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
             
             
-                Assets.Scripts.LuaObjects.CatLua gen_to_be_invoked = (Assets.Scripts.LuaObjects.CatLua)translator.FastGetCSObj(L, 1);
+                Assets.Scripts.LuaAPIs.CatAPI gen_to_be_invoked = (Assets.Scripts.LuaAPIs.CatAPI)translator.FastGetCSObj(L, 1);
             
             
                 
                 {
-                    Assets.Scripts.LuaObjects.CheckEnum _dffas;translator.Get(L, 2, out _dffas);
+                    Assets.Scripts.LuaAPIs.CheckEnum _dffas;translator.Get(L, 2, out _dffas);
                     
                     gen_to_be_invoked.dddd( _dffas );
                     
@@ -220,8 +220,8 @@ namespace XLua.CSObjectWrap
 		    try {
                 ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
 			
-                Assets.Scripts.LuaObjects.CatLua gen_to_be_invoked = (Assets.Scripts.LuaObjects.CatLua)translator.FastGetCSObj(L, 1);
-                translator.PushAssetsScriptsLuaObjectsCheckEnum(L, gen_to_be_invoked.en);
+                Assets.Scripts.LuaAPIs.CatAPI gen_to_be_invoked = (Assets.Scripts.LuaAPIs.CatAPI)translator.FastGetCSObj(L, 1);
+                translator.PushAssetsScriptsLuaAPIsCheckEnum(L, gen_to_be_invoked.en);
             } catch(System.Exception gen_e) {
                 return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
             }
@@ -236,8 +236,8 @@ namespace XLua.CSObjectWrap
 		    try {
                 ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
 			
-                Assets.Scripts.LuaObjects.CatLua gen_to_be_invoked = (Assets.Scripts.LuaObjects.CatLua)translator.FastGetCSObj(L, 1);
-                Assets.Scripts.LuaObjects.CheckEnum gen_value;translator.Get(L, 2, out gen_value);
+                Assets.Scripts.LuaAPIs.CatAPI gen_to_be_invoked = (Assets.Scripts.LuaAPIs.CatAPI)translator.FastGetCSObj(L, 1);
+                Assets.Scripts.LuaAPIs.CheckEnum gen_value;translator.Get(L, 2, out gen_value);
 				gen_to_be_invoked.en = gen_value;
             
             } catch(System.Exception gen_e) {

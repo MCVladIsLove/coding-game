@@ -21,12 +21,13 @@ namespace XLua.CSObjectWrap
         {
 			ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
 			System.Type type = typeof(Assets.Scripts.LuaIntegration.AsyncCommandsController);
-			Utils.BeginObjectRegister(type, L, translator, 0, 3, 0, 0);
+			Utils.BeginObjectRegister(type, L, translator, 0, 4, 0, 0);
 			
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "RunLoopIteration", _m_RunLoopIteration);
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "StopAsyncExecution", _m_StopAsyncExecution);
 			Utils.RegisterFunc(L, Utils.METHOD_IDX, "RunAsyncCommand", _m_RunAsyncCommand);
 			
+			Utils.RegisterFunc(L, Utils.METHOD_IDX, "AsyncExecutionFailed", _e_AsyncExecutionFailed);
 			
 			
 			
@@ -166,6 +167,40 @@ namespace XLua.CSObjectWrap
         
 		
 		
+        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+        static int _e_AsyncExecutionFailed(RealStatePtr L)
+        {
+		    try {
+                ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
+			    int gen_param_count = LuaAPI.lua_gettop(L);
+			Assets.Scripts.LuaIntegration.AsyncCommandsController gen_to_be_invoked = (Assets.Scripts.LuaIntegration.AsyncCommandsController)translator.FastGetCSObj(L, 1);
+                System.Action<XLua.LuaException> gen_delegate = translator.GetDelegate<System.Action<XLua.LuaException>>(L, 3);
+                if (gen_delegate == null) {
+                    return LuaAPI.luaL_error(L, "#3 need System.Action<XLua.LuaException>!");
+                }
+				
+				if (gen_param_count == 3)
+				{
+					
+					if (LuaAPI.xlua_is_eq_str(L, 2, "+")) {
+						gen_to_be_invoked.AsyncExecutionFailed += gen_delegate;
+						return 0;
+					} 
+					
+					
+					if (LuaAPI.xlua_is_eq_str(L, 2, "-")) {
+						gen_to_be_invoked.AsyncExecutionFailed -= gen_delegate;
+						return 0;
+					} 
+					
+				}
+			} catch(System.Exception gen_e) {
+                return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
+            }
+			LuaAPI.luaL_error(L, "invalid arguments to Assets.Scripts.LuaIntegration.AsyncCommandsController.AsyncExecutionFailed!");
+            return 0;
+        }
+        
 		
 		
     }

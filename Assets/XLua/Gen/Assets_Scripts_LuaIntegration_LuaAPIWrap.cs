@@ -15,12 +15,12 @@ using System.Collections.Generic;
 namespace XLua.CSObjectWrap
 {
     using Utils = XLua.Utils;
-    public class AssetsScriptsLuaIntegrationInjectableInLuaWrap 
+    public class AssetsScriptsLuaIntegrationLuaAPIWrap 
     {
         public static void __Register(RealStatePtr L)
         {
 			ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
-			System.Type type = typeof(Assets.Scripts.LuaIntegration.InjectableInLua);
+			System.Type type = typeof(Assets.Scripts.LuaIntegration.LuaAPI);
 			Utils.BeginObjectRegister(type, L, translator, 0, 0, 2, 0);
 			
 			
@@ -46,7 +46,7 @@ namespace XLua.CSObjectWrap
         [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
         static int __CreateInstance(RealStatePtr L)
         {
-            return LuaAPI.luaL_error(L, "Assets.Scripts.LuaIntegration.InjectableInLua does not have a constructor!");
+            return LuaAPI.luaL_error(L, "Assets.Scripts.LuaIntegration.LuaAPI does not have a constructor!");
         }
         
 		
@@ -65,7 +65,7 @@ namespace XLua.CSObjectWrap
 		    try {
                 ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
 			
-                Assets.Scripts.LuaIntegration.InjectableInLua gen_to_be_invoked = (Assets.Scripts.LuaIntegration.InjectableInLua)translator.FastGetCSObj(L, 1);
+                Assets.Scripts.LuaIntegration.LuaAPI gen_to_be_invoked = (Assets.Scripts.LuaIntegration.LuaAPI)translator.FastGetCSObj(L, 1);
                 translator.Push(L, gen_to_be_invoked.AsyncCommandsController);
             } catch(System.Exception gen_e) {
                 return LuaAPI.luaL_error(L, "c# exception:" + gen_e);
@@ -79,7 +79,7 @@ namespace XLua.CSObjectWrap
 		    try {
                 ObjectTranslator translator = ObjectTranslatorPool.Instance.Find(L);
 			
-                Assets.Scripts.LuaIntegration.InjectableInLua gen_to_be_invoked = (Assets.Scripts.LuaIntegration.InjectableInLua)translator.FastGetCSObj(L, 1);
+                Assets.Scripts.LuaIntegration.LuaAPI gen_to_be_invoked = (Assets.Scripts.LuaIntegration.LuaAPI)translator.FastGetCSObj(L, 1);
                 translator.Push(L, gen_to_be_invoked.Commands);
             } catch(System.Exception gen_e) {
                 return LuaAPI.luaL_error(L, "c# exception:" + gen_e);

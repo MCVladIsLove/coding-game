@@ -8,7 +8,7 @@ namespace Assets.Scripts.LuaIntegration
     public class ScriptEnvironment
     {
         private LuaEnv _luaEnv;
-        private InjectableInLua _injectedObject;
+        private LuaAPI _injectedAPI;
         private LuaTable _scriptTable;
 
         private ILuaTablePreparer _luaTablePreparer;
@@ -27,28 +27,28 @@ namespace Assets.Scripts.LuaIntegration
         public event Action<LuaException> RuntimeExceptionThrown;
 
         public ScriptEnvironment(LuaEnv luaEnv,
-            InjectableInLua injectedObject,
+            LuaAPI injectedAPI,
             string defaultScript,
             string name,
             ILuaTablePreparer tablePreparer,
             ILuaScriptPreparer scriptPreparer)
         {
             _luaEnv = luaEnv;
-            _injectedObject = injectedObject;
+            _injectedAPI = injectedAPI;
             _luaTablePreparer = tablePreparer;
             _luaScriptPreparer = scriptPreparer;
             _currentScript = defaultScript;
             _defaultScript = defaultScript;
             _name = name;
 
-            _injectedObject.AsyncCommandsController.AsyncExecutionFailed += OnRuntimeException;
+            _injectedAPI.AsyncCommandsController.AsyncExecutionFailed += OnRuntimeException;
             CreateTable();
         }
 
         private void CreateTable()
         {
             _scriptTable = _luaEnv.NewTable();
-            _luaTablePreparer.PrepareTable(_luaEnv, _scriptTable, _injectedObject);
+            _luaTablePreparer.PrepareTable(_luaEnv, _scriptTable, _injectedAPI);
         }
 
         public void SetScript(string newScript)
@@ -80,7 +80,7 @@ namespace Assets.Scripts.LuaIntegration
 
         public LuaException TryCompileScript()
         {
-            string preparedScript = _luaScriptPreparer.PrepareScript(_currentScript, _injectedObject);
+            string preparedScript = _luaScriptPreparer.PrepareScript(_currentScript, _injectedAPI);
             try
             {
                 _luaEnv.DoString(preparedScript, chunkName: _name, env: _scriptTable);
@@ -103,7 +103,7 @@ namespace Assets.Scripts.LuaIntegration
         public void ReloadTable()
         {
             if (IsScriptRunning)
-                _injectedObject.AsyncCommandsController.StopAsyncExecution();
+                _injectedAPI.AsyncCommandsController.StopAsyncExecution();
             _scriptTable.Dispose();
             CreateTable();
         }

@@ -3,12 +3,12 @@
 <linker>
 
 	<assembly fullname="Assembly-CSharp">
-	    <type fullname="Assets.Scripts.LuaObjects.CatLua" preserve="all"/>
-		<type fullname="Assets.Scripts.LuaObjects.CheckEnum" preserve="all"/>
-		<type fullname="Assets.Scripts.LuaObjects.CheckEnum2" preserve="all"/>
-		<type fullname="Assets.Scripts.LuaObjects.CheckEnum23" preserve="all"/>
+	    <type fullname="Assets.Scripts.LuaAPIs.CatAPI" preserve="all"/>
+		<type fullname="Assets.Scripts.LuaAPIs.CheckEnum" preserve="all"/>
+		<type fullname="Assets.Scripts.LuaAPIs.CheckEnum2" preserve="all"/>
+		<type fullname="Assets.Scripts.LuaAPIs.CheckEnum23" preserve="all"/>
 		<type fullname="Assets.Scripts.LuaIntegration.AsyncCommandsController" preserve="all"/>
-		<type fullname="Assets.Scripts.LuaIntegration.InjectableInLua" preserve="all"/>
+		<type fullname="Assets.Scripts.LuaIntegration.LuaAPI" preserve="all"/>
 		<type fullname="Assets.Scripts.LuaIntegration.LuaCsCommand" preserve="all"/>
 		<type fullname="Assets.Scripts.LuaCommands.SayCommand" preserve="all"/>
 		

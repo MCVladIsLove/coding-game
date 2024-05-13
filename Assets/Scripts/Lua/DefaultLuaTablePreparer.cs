@@ -10,7 +10,7 @@ namespace Assets.Scripts.LuaIntegration
 {
     public class DefaultLuaTablePreparer : ILuaTablePreparer
     {
-        public void PrepareTable(LuaEnv luaEnv, LuaTable table, InjectableInLua injectedObject)
+        public void PrepareTable(LuaEnv luaEnv, LuaTable table, LuaAPI injectedObject)
         {
             LuaTable meta = luaEnv.NewTable();
             ConfigureMetaTable(meta, luaEnv, injectedObject);
@@ -39,7 +39,7 @@ namespace Assets.Scripts.LuaIntegration
             }
         }
 
-        private void ConfigureMetaTable(LuaTable meta, LuaEnv luaEnv, InjectableInLua injectedObject)
+        private void ConfigureMetaTable(LuaTable meta, LuaEnv luaEnv, LuaAPI injectedObject)
         {
             meta.Set("_G", luaEnv.Global);
             meta.Set(LuaScriptReservedMemberNames.INJECTED_TABLE, injectedObject);
@@ -119,7 +119,7 @@ namespace Assets.Scripts.LuaIntegration
             table.Set("self", table);
         }
 
-        private void SetEnumsInTable(LuaEnv luaEnv, LuaTable table, InjectableInLua injectedObject)
+        private void SetEnumsInTable(LuaEnv luaEnv, LuaTable table, LuaAPI injectedObject)
         {
             List<Type> enums = new List<Type>();
             MethodInfo[] methods = injectedObject.GetType().GetMethods();

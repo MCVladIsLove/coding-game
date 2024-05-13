@@ -5,7 +5,7 @@ using XLua;
 namespace Assets.Scripts.LuaIntegration
 {
     [LuaCallCSharp]
-    public abstract class InjectableInLua
+    public abstract class LuaAPI
     {
         protected Dictionary<string, LuaCsCommand> _commands = new Dictionary<string, LuaCsCommand>();
         protected MonoBehaviour _parentBehaviour;
@@ -14,7 +14,7 @@ namespace Assets.Scripts.LuaIntegration
         public AsyncCommandsController AsyncCommandsController => _asyncCommandsController;
         public Dictionary<string, LuaCsCommand> Commands => _commands;
 
-        public InjectableInLua(MonoBehaviour parentBehaviour)
+        public LuaAPI(MonoBehaviour parentBehaviour)
         {
             _asyncCommandsController = new AsyncCommandsController(parentBehaviour);
             _parentBehaviour = parentBehaviour;
