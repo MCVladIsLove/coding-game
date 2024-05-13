@@ -60,7 +60,7 @@ namespace Assets.Scripts.LuaIntegration
                         }
                         catch (LuaException e)
                         {
-                            AsyncExecutionFailed(e);
+                            AsyncExecutionFailed?.Invoke(e);
                         }
                         catch (Exception e)
                         {

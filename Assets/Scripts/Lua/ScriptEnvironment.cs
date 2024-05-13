@@ -117,6 +117,7 @@ namespace Assets.Scripts.LuaIntegration
 
         private void OnRuntimeException(LuaException exception)
         {
+            _luaEnv.DoString($"{LuaScriptReservedMemberNames.IS_SCRIPT_RUNNING} = false", chunkName: _name, env: _scriptTable);
             RuntimeExceptionThrown?.Invoke(exception);
         }
     }
