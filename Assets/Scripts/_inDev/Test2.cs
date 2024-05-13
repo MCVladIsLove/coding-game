@@ -13,8 +13,6 @@ public class Test2 : MonoBehaviour
     ScriptEnvironment mainEnv;
     CatLua cat;
     static LuaEnv env;
-    Action act;
-
 
     private void Start()
     {
@@ -30,7 +28,14 @@ public class Test2 : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (!mainEnv.IsScriptRunning)
-                act();
+            {
+                LuaException e = mainEnv.TryExecuteScript();
+                if (e != null)
+                {
+                    Debug.Log(e.Message);
+                }
+            }
+              //  act();
         }
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
@@ -59,10 +64,14 @@ public class Test2 : MonoBehaviour
                 env,
                 cat,
                 s,
+                "mainCat",
                 new DefaultLuaTablePreparer(),
                 new DefaultLuaScriptPreparer());
-
-            act = mainEnv.GetScriptAsDelegate();
+            mainEnv.RuntimeExceptionThrown += (e) =>
+            {
+                Debug.Log("Msg: " + e.Message);
+            };
+            mainEnv.TryCompileScript();
         }
         if (Input.GetKeyDown(KeyCode.A))
         {
@@ -71,12 +80,17 @@ public class Test2 : MonoBehaviour
           --  print('Now i Move left')
             Move(Vector3.left)
             Move(Vector3.left)
+            Move(22) --runtime exception
             Move(Vector3.left)
             --Say('I', ' Reached the end')
 ";
             mainEnv.SetScript(script2);
             mainEnv.ReloadTable();
-            act = mainEnv.GetScriptAsDelegate();
+            LuaException e = mainEnv.TryCompileScript();
+            if (e != null)
+            {
+                Debug.Log(e.Message);
+            }
         }
         if (Input.GetKeyDown(KeyCode.D))
         {
@@ -85,12 +99,13 @@ public class Test2 : MonoBehaviour
             print('Now i Move right')
             Move(Vector3.right)
             Move(Vector3.right)
+            Say('asdas', 'sdsds').Create = 2 --runtime exception
             Move(Vector3.right)
             Say('I', ' Reached the end')
 ";
             mainEnv.SetScript(script3);
             mainEnv.ReloadTable();
-            act = mainEnv.GetScriptAsDelegate();
+            mainEnv.TryCompileScript();
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
@@ -104,12 +119,11 @@ public class Test2 : MonoBehaviour
 ";
             mainEnv.SetScript(script2);
             mainEnv.ReloadTable();
-            act = mainEnv.GetScriptAsDelegate();
+            mainEnv.TryCompileScript();
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
             mainEnv.Reset();
-            act = mainEnv.GetScriptAsDelegate();
         }
         if (Input.GetKeyDown(KeyCode.I))
         {
@@ -142,7 +156,7 @@ public class Test2 : MonoBehaviour
 ";
             mainEnv.SetScript(script2);
             mainEnv.ReloadTable();
-            act = mainEnv.GetScriptAsDelegate();
+            mainEnv.TryCompileScript();
         }
 
     }

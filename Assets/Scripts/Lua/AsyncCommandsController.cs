@@ -12,6 +12,8 @@ namespace Assets.Scripts.LuaIntegration
         private Coroutine _activeCoroutine;
         private MonoBehaviour _coroutineRunner;
 
+        public event Action<LuaException> AsyncExecutionFailed;
+
         public AsyncCommandsController(MonoBehaviour coroutineRunner)
         {
             _coroutineRunner = coroutineRunner;
@@ -52,7 +54,18 @@ namespace Assets.Scripts.LuaIntegration
                     _coroutineRunner, executionTime, () =>
                     {
                         RemoveAsyncCommand();
-                        onFinish();
+                        try
+                        {
+                            onFinish();
+                        }
+                        catch (LuaException e)
+                        {
+                            AsyncExecutionFailed(e);
+                        }
+                        catch (Exception e)
+                        {
+                            Debug.LogError(e);
+                        }
                     }));
         }
     }
