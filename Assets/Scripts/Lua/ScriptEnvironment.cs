@@ -22,6 +22,7 @@ namespace Assets.Scripts.LuaIntegration
 
         public bool IsScriptRunning => _scriptTable.Get<bool>(LuaScriptReservedMemberNames.IS_SCRIPT_RUNNING);
         public string Name => _name;
+        public string CurrentScript => _currentScript;
 
         public event Action ScriptCompiled;
         public event Action<LuaException> RuntimeExceptionThrown;
