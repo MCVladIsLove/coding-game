@@ -1,4 +1,4 @@
-﻿namespace LuaLexing
+﻿namespace Assets.Scripts.LuaLexing
 {
     public struct Token
     {

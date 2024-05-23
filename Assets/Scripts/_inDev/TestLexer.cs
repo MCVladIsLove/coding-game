@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using LuaLexing;
+using Assets.Scripts.LuaLexing;
 using System.Text.RegularExpressions;
 
 public class TestLexer : MonoBehaviour

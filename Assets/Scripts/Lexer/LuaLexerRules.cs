@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace LuaLexing
+namespace Assets.Scripts.LuaLexing
 {
     public class LuaLexerRules
     {

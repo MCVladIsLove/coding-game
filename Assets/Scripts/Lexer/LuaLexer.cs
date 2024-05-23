@@ -2,7 +2,7 @@
 using System.Text.RegularExpressions;
 using UnityEngine;
 
-namespace LuaLexing
+namespace Assets.Scripts.LuaLexing
 {
     public class LuaLexer
     {
