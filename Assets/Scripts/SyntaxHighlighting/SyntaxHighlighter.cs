@@ -9,7 +9,7 @@ namespace Assets.Scripts.SyntaxHighlighting
         private StringBuilder _styledTextBuilder = new StringBuilder();
         private StyleDeterminer _styleDeterminer = new StyleDeterminer();
 
-        public string GetHighlightedText(string text, List<Token> tokenizedText)
+        public string GetHighlightedText(List<Token> tokenizedText)
         {
             _styledTextBuilder.Clear();
 
