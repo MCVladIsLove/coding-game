@@ -3,13 +3,18 @@ using XLua;
 using System.Collections.Generic;
 using System;
 using System.Text.RegularExpressions;
+using Assets.Scripts.SyntaxHighlighting;
+using Assets.Scripts.LuaLexing;
 
 namespace Assets.Scripts.ScriptEditor
 {
     public class ScriptEditorViewModel
     {
         private ScriptEditorModel _model;
+        private SyntaxHighlighter _syntaxHighlighter;
+        private LuaLexer _luaLexer;
 
+        private string _displayedText;
         private int _currentFunctionIndex;
 
         private string[] _rememberedScripts;
@@ -21,9 +26,12 @@ namespace Assets.Scripts.ScriptEditor
         public event Action<LuaException> CompilationFailed;
         public event Action<string> CurrentScriptSwitched;
         public event Action<ScriptEnvironment[]> FunctionSetChanged;
+        public event Action<string> DisplayedTextChanged;
 
-        public ScriptEditorViewModel(ScriptEditorModel model)
+        public ScriptEditorViewModel(ScriptEditorModel model, SyntaxHighlighter syntaxHighlighter, LuaLexer lexer)
         {
+            _luaLexer = lexer;
+            _syntaxHighlighter = syntaxHighlighter;
             _model = model;
             _currentFunctionIndex = 0;
             _rememberedScripts = new string[_model.OverridableFunctions.Length];
@@ -33,13 +41,16 @@ namespace Assets.Scripts.ScriptEditor
 
         public void ChangeScriptText(string newScriptText)
         {
+            List<Token> tokens = _luaLexer.Tokenize(newScriptText);
+            _displayedText = _syntaxHighlighter.GetHighlightedText(tokens);
+            DisplayedTextChanged?.Invoke(_displayedText);
+
             _rememberedScripts[_currentFunctionIndex] = newScriptText;
         }
 
         public void Compile(string script)
         {
-            string cleanScript = Regex.Replace(script, "<.*>", string.Empty); //rewrite regexp
-            CurrentFunction.SetScript(cleanScript);
+            CurrentFunction.SetScript(script);
             CurrentFunction.ReloadTable();
 
             LuaException exception = CurrentFunction.TryCompileScript();

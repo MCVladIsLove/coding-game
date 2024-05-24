@@ -266,7 +266,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &142872572
 RectTransform:
   m_ObjectHideFlags: 0
@@ -309,6 +309,7 @@ MonoBehaviour:
   _compileButton: {fileID: 1432687806}
   _functionsGroup: {fileID: 507883089}
   _codeInputField: {fileID: 999926521}
+  _codeDisplayText: {fileID: 964349461}
   _closeButton: {fileID: 527712168}
   _hintText: {fileID: 1254325836}
   _functionTabPrefab: {fileID: 8373795575209125071, guid: cfe9ad7f1f3e9184588d275b03917b6a, type: 3}
@@ -1069,7 +1070,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &964349460
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1321,8 +1322,8 @@ MonoBehaviour:
   m_OnTouchScreenKeyboardStatusChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_CustomCaretColor: 0
+  m_CaretColor: {r: 0.9098039, g: 0.93333334, b: 0.6627451, a: 1}
+  m_CustomCaretColor: 1
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
   m_Text: '<color=#766DAA>--Sample code</color>
 
@@ -1341,7 +1342,7 @@ MonoBehaviour:
   m_CaretBlinkRate: 0.74
   m_CaretWidth: 3
   m_ReadOnly: 0
-  m_RichText: 1
+  m_RichText: 0
   m_GlobalFontAsset: {fileID: 11400000, guid: 904d2c7e64512234b90666b2055761b1, type: 2}
   m_OnFocusSelectAll: 0
   m_ResetOnDeActivation: 0
@@ -5105,7 +5106,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4289326824
-  m_fontColor: {r: 0.909804, g: 0.93333334, b: 0.6627451, a: 1}
+  m_fontColor: {r: 0.909804, g: 0.93333334, b: 0.6627451, a: 0}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -5700,7 +5701,6 @@ GameObject:
   - component: {fileID: 1348885576}
   - component: {fileID: 1348885575}
   - component: {fileID: 1348885578}
-  - component: {fileID: 1348885579}
   m_Layer: 0
   m_Name: FarmerEditor
   m_TagString: Untagged
@@ -5833,18 +5833,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &1348885579
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1348885574}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b32f9208c40485746b7d71845598e862, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1432687802
 GameObject:
   m_ObjectHideFlags: 0

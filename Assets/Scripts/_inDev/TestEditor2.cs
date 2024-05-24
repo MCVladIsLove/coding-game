@@ -96,7 +96,9 @@ public class TestEditor2 : MonoBehaviour
         };
 
         _model = new ScriptEditorModel(_envs);
-        _viewModel = new ScriptEditorViewModel(_model);
+        _viewModel = new ScriptEditorViewModel(_model,
+            new Assets.Scripts.SyntaxHighlighting.SyntaxHighlighter(),
+            new Assets.Scripts.LuaLexing.LuaLexer());
     }
 
 

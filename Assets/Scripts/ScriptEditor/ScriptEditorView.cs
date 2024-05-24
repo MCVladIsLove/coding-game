@@ -13,6 +13,7 @@ namespace Assets.Scripts.ScriptEditor
         [SerializeField] private Button _compileButton;
         [SerializeField] private LayoutGroup _functionsGroup;
         [SerializeField] private TMP_InputField _codeInputField;
+        [SerializeField] private TMP_Text _codeDisplayText;
         [SerializeField] private Button _closeButton;
         [SerializeField] private TMP_Text _hintText;
         [SerializeField] private OverridableFunctionTab _functionTabPrefab;
@@ -25,6 +26,7 @@ namespace Assets.Scripts.ScriptEditor
             _viewModel.CompilationFailed += OnCompilationFailed;
             _viewModel.CurrentScriptSwitched += OnCurrentScriptSwitched;
             _viewModel.FunctionSetChanged += OnFunctionSetChanged;
+            _viewModel.DisplayedTextChanged += OnDisplayedTextChanged;
 
             _resetButton.onClick.AddListener(OnResetPressed);
             _closeButton.onClick.AddListener(OnClosePressed);
@@ -37,13 +39,19 @@ namespace Assets.Scripts.ScriptEditor
             _viewModel.CompilationFailed -= OnCompilationFailed;
             _viewModel.CurrentScriptSwitched -= OnCurrentScriptSwitched;
             _viewModel.FunctionSetChanged -= OnFunctionSetChanged;
+            _viewModel.DisplayedTextChanged -= OnDisplayedTextChanged;
 
             _resetButton.onClick.RemoveListener(OnResetPressed);
-            _closeButton.onClick.AddListener(OnClosePressed);
+            _closeButton.onClick.RemoveListener(OnClosePressed);
             _compileButton.onClick.RemoveListener(OnCompilePressed);
             _codeInputField.onValueChanged.RemoveListener(OnTextInputChanged);
         }
-        
+
+        private void OnDisplayedTextChanged(string text)
+        {
+            _codeDisplayText.text = text;
+        }
+
         private void OnFunctionSetChanged(ScriptEnvironment[] functionSet)
         {
             RemoveFunctionsTabs();
