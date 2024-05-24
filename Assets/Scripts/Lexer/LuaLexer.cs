@@ -32,9 +32,9 @@ namespace Assets.Scripts.LuaLexing
                     }
                 }
 
-                if (match == null)
+                if (!match.Success)
                 {
-                    Debug.LogError($"Cant Tokenize string (pos: {textPosition}): {text.Substring(textPosition, 15)}");
+                    Debug.LogError($"Cant Tokenize string (pos: {textPosition}): {text.Substring(textPosition)}");
                     textPosition++;
                 }
             }

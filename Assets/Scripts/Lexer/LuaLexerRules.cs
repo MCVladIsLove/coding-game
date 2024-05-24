@@ -14,7 +14,7 @@ namespace Assets.Scripts.LuaLexing
             new LuaLexerRule(new Regex(@"^(?:and|break|do|else|elseif|end|false|for|function|if|in|local|nil|not|or|repeat|return|then|true|until|while)\b"), TokenType.Keyword),
             new LuaLexerRule(new Regex(@"^(?:\+|\-|\*|\/|\%|\^|\#|\=\=|\~\=|\<\=|\>\=|\<|\>|\=|\(|\)|\{|\}|\;|\:|\.|\.\.|\.\.\.|\!\=|\!)"), TokenType.Operator),
             new LuaLexerRule(new Regex(@"^[+-]?(?:0x[\da-f]+|(?:(?:\.\d+|\d+(?:\.\d*)?)(?:e[+\-]?\d+)?))"), TokenType.Number),
-            new LuaLexerRule(new Regex(@"^[A-Za-z_]\w*"), TokenType.Identifier),
+            new LuaLexerRule(new Regex(@"^[A-Za-zа-яА-ЯёЁ_]\w*"), TokenType.Identifier),
             new LuaLexerRule(new Regex(@"^[^\w\t\n\r \xA0][^\w\t\n\r \xA0\" + "\"" + @"\'\-\+=]*"), TokenType.Punctuation)
         };
 
